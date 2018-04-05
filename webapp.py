@@ -45,7 +45,9 @@ github = oauth.remote_app(
 #def login():   
 #    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
 
-#Start here
+@app.route('/')
+def render_home()
+        return render_template('home.html')
 
 #@app.route('/logout')
 #def logout():
