@@ -45,7 +45,7 @@ def inject_logged_in():
 def login():   
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
 
-
+#Start here
 
 @app.route('/logout')
 def logout():
