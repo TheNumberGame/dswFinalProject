@@ -71,5 +71,9 @@ def authorized():
             message='Unable to login, please try again.  '
     return render_template('home.html', message=message)
 
+@github.tokengetter
+def get_github_oath_token():
+     return session.get('github_token')
+
 if __name__ == '__main__':
     app.run()
