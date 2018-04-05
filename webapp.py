@@ -14,6 +14,17 @@ app == Flask(__name__)
 app.debug = True
 
 oauth = OAuth(app)
+app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
+
+url = 'mongodb://{}:{}@{}:{}/{}'.format(
+        os.environ["MONGO_USERNAME"],
+        os.environ["MONGO_PASSWORD"],
+        os.environ["MONGO_HOST"],
+        os.environ["MONGO_PORT"],
+        os.environ["MONGO_DBNAME"])
+clt = pymongo.MongoClient(url)
+usr = clt[os.environ["MONGO_DBNAME"]]
+collection = usr['forum']
 
 github = oauth.remote_app(
     'github', consumer_key=os.environ['GITHUB_CLIENT_ID'], #your web app's "username" for github's OAuth
