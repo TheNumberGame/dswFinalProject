@@ -9,7 +9,7 @@ import pymongo
 from datetime import datetime
 from bson import objectid
 
-app == Flask(__name__)
+app = Flask(__name__)
 
 app.debug = True
 
