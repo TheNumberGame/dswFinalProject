@@ -13,6 +13,8 @@ app == Flask(__name__)
 
 app.debug = True
 
+oauth = OAuth(app)
+
 github = oauth.remote_app(
     'github', consumer_key=os.environ['GITHUB_CLIENT_ID'], #your web app's "username" for github's OAuth
     consumer_secret=os.environ['GITHUB_CLIENT_SECRET'],#your web app's "password" for github's OAuth
@@ -31,6 +33,8 @@ def inject_logged_in():
 @app.route('/login')
 def login():   
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
+
+
 
 @app.route('/logout')
 def logout():
