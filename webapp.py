@@ -49,6 +49,37 @@ def login():
 def render_home():
         return render_template('home.html')
 
+@app.route('/posted', methods=['POST'])
+def post():
+    if not request.form['message'] == "" and not request.form['message'].isspace():
+        data = { "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
+    else:
+        return render_template('home.html', past_posts = posts_to_html(['Invalid']))
+    
+    collection.insert(data)
+    
+    return redirect(url_for("home"))
+
+def posts_to_html(data = None):
+     option = ""
+     try:
+          session['user_data']
+          try:
+               for i in data.sort([("date", -1)]):
+                    option += Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + i["name"] + "</span>: " + i["message"]) 
+                    if i['name'] == session['user_data']['login']:
+                         option += Markup("<br><button type=\"submit\" name=\"DeletePost\" value= \""+ str(i["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
+                    else:
+                         option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
+          except:
+               return data
+     except:
+          try:
+               for i in data.sort([("date", -1)]):
+                    option += Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + i["name"] + "</span>: " + i["message"]+"<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>") 
+          except:
+               return data
+
 @app.route('/logout')
 def logout():
     session.clear()
