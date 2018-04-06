@@ -11,3 +11,4 @@ pymongo
 datetime
 bson
 gridfs
+werkzeug
