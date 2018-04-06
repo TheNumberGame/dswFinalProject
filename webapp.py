@@ -6,8 +6,10 @@ import pprint
 import os
 import json
 import pymongo
+import gridfs
 from datetime import datetime
-from bson import objectid
+from bson.objectid import ObjectID
+
 
 app = Flask(__name__)
 
@@ -47,7 +49,7 @@ def login():
 
 @app.route('/')
 def render_home():
-        return render_template('home.html')
+        return render_template('home.html', posts_to_html(collection.find()))
 
 @app.route('/posted', methods=['POST'])
 def post():
@@ -80,10 +82,21 @@ def posts_to_html(data = None):
           except:
                return data
 
+
+@app.route('/b', methods=['POST'])
+def delPost():
+    docId = request.form['DeletePost']
+    
+    collection.delete_one({'_id': ObjectId(docId)})
+   
+    return redirect(url_for("home"))
+
+
 @app.route('/logout')
 def logout():
     session.clear()
     return render_template('home.html', message='You were logged out')
+
 
 @app.route('/login/authorized')
 def authorized():
