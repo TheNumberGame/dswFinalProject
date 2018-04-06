@@ -56,7 +56,7 @@ def render_home():
 @app.route('/posted', methods=['POST'])
 def post():
     if not request.form['message'] == "" and not request.form['message'].isspace() and 'file' not in request.files:
-        data = { "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
+        data = { "_id": ObjectID(), "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
     else:
         return render_template('home.html', past_posts = posts_to_html(['Invalid']))
     
