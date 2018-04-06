@@ -26,7 +26,9 @@ url = 'mongodb://{}:{}@{}:{}/{}'.format(
         os.environ["MONGO_DBNAME"])
 clt = pymongo.MongoClient(url)
 usr = clt[os.environ["MONGO_DBNAME"]]
-collection = usr['forum']
+collection = usr['pictures']
+
+fs = gridfs.GridFS(usr)
 
 github = oauth.remote_app(
     'github', consumer_key=os.environ['GITHUB_CLIENTID'], #your web app's "username" for github's OAuth
@@ -53,11 +55,13 @@ def render_home():
 
 @app.route('/posted', methods=['POST'])
 def post():
-    if not request.form['message'] == "" and not request.form['message'].isspace():
+    if not request.form['message'] == "" and not request.form['message'].isspace() and 'file' not in request.files:
         data = { "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
     else:
         return render_template('home.html', past_posts = posts_to_html(['Invalid']))
     
+    file = request.files['file']
+        
     collection.insert(data)
     
     return redirect(url_for("home"))
