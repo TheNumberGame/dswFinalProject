@@ -6,8 +6,10 @@
 {% if 'github_token' in session %}
 <form action="/posted" method="post">
   <textarea name="message" style="width:100%; height:100px;"></textarea>
+  <br>
   <input name="file" type="file">
-  <imput type="submit" value="submit">
+  <br>
+  <input type="submit" value="submit">
 </form>
 {% else %}
   <p>Must be logged in.</p>
