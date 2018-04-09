@@ -51,7 +51,7 @@ def login():
 
 @app.route('/')
 def render_home():
-        return render_template('home.html', posts_to_html(collection.find()))
+        return render_template('home.html', message=posts_to_html(collection.find()))
 
 @app.route('/posted', methods=['POST'])
 def post():
