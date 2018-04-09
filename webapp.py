@@ -26,9 +26,9 @@ url = 'mongodb://{}:{}@{}:{}/{}'.format(
         os.environ["MONGO_DBNAME"])
 clt = pymongo.MongoClient(url)
 usr = clt[os.environ["MONGO_DBNAME"]]
-collection = usr['pictures']
+collection = usr['chat']
 
-fs = gridfs.GridFS(usr)
+fs = gridfs.GridFS(usr, 'pictures')
 
 github = oauth.remote_app(
     'github', consumer_key=os.environ['GITHUB_CLIENTID'], #your web app's "username" for github's OAuth
@@ -59,7 +59,7 @@ def post():
         temp_file_id = fs.put(request.files['file'])
     else:
         temp_file_id = None
-        
+    
     if not request.form['message'] == "" and not request.form['message'].isspace():
         if not temp_file_id == None:
              data = { "_id": ObjectId(), "pic_id": temp, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
