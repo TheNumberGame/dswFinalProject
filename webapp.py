@@ -6,7 +6,7 @@ import pprint
 import os
 import json
 import pymongo
-import gridfs
+#import gridfs
 from datetime import datetime
 from bson.objectid import ObjectID
 
@@ -28,7 +28,7 @@ clt = pymongo.MongoClient(url)
 usr = clt[os.environ["MONGO_DBNAME"]]
 collection = usr['pictures']
 
-fs = gridfs.GridFS(usr)
+#fs = gridfs.GridFS(usr)
 
 github = oauth.remote_app(
     'github', consumer_key=os.environ['GITHUB_CLIENTID'], #your web app's "username" for github's OAuth
