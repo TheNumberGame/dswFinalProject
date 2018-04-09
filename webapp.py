@@ -8,7 +8,7 @@ import json
 import pymongo
 #import gridfs
 from datetime import datetime
-from bson.objectid import ObjectID
+from bson.objectid import ObjectId
 
 
 app = Flask(__name__)
@@ -56,23 +56,10 @@ def render_home():
 @app.route('/posted', methods=['POST'])
 def post():
     #if not request.form['message'] == "" and not request.form['message'].isspace():
-    #   if 'file' in request.files:
-    #         temp = fs.put(request.files['file'])
-    #         data = { "_id": ObjectID(), "pic_id": fs_id, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
-    #    else:        
-    #         data = { "_id": ObjectID(), "pic_id": 0, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
-    #else:
-    #    return render_template('home.html', past_posts = posts_to_html(['Invalid']))
-    #if 'file' in request.files:
-    #     temp = fs.put(request.files['file'])
-    #else:
-    #    temp = None
-    
-    #if not request.form['message'] == "" and not request.form['message'].isspace():
     #    if not temp = None:
-    #         data = { "_id": ObjectID(), "pic_id": temp, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
+    #         data = { "_id": ObjectId(), "pic_id": temp, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
     #    else:
-    #        data = { "_id": ObjectID(), "pic_id": 0, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}         
+    #        data = { "_id": ObjectId(), "pic_id": 0, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}         
     #else:
     #    return return render_template('home.html', posts_to_html("Invalid"))
         
