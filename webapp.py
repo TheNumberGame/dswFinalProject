@@ -55,7 +55,6 @@ def home():
 
 @app.route('/posted', methods=['POST'])
 def post():
-    print(len(request.files))
     if 'file' in request.files:
         print(fs.put(request.files['file']))
         temp_file_id = fs.put(request.files['file'])
@@ -64,7 +63,7 @@ def post():
     
     if not request.form['message'] == "" and not request.form['message'].isspace():
         if not temp_file_id == None:
-             data = { "_id": ObjectId(), "pic_id": temp, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
+             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
         else:
             data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}         
     else:
