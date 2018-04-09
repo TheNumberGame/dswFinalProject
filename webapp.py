@@ -66,7 +66,7 @@ def post():
         else:
             data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}         
     else:
-        return render_template('home.html', posts_to_html("Invalid"))
+        return render_template('home.html', message=posts_to_html("Invalid"))
         
     collection.insert(data)
     
