@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.debug = True
 
 oauth = OAuth(app)
-app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
+app.secret_key = os.environ['SECRET_KEY']
 
 url = 'mongodb://{}:{}@{}:{}/{}'.format(
         os.environ["MONGO_USERNAME"],
