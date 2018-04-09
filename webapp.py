@@ -92,7 +92,7 @@ def posts_to_html(data = None):
                     option += Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + i["name"] + "</span>: " + i["message"]+"<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>") 
           except:
                return data
-
+     return option
 
 @app.route('/b', methods=['POST'])
 def delPost():
