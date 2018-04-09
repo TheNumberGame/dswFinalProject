@@ -6,7 +6,7 @@ import pprint
 import os
 import json
 import pymongo
-#import gridfs
+import gridfs
 from datetime import datetime
 from bson.objectid import ObjectId
 
@@ -28,7 +28,7 @@ clt = pymongo.MongoClient(url)
 usr = clt[os.environ["MONGO_DBNAME"]]
 collection = usr['pictures']
 
-#fs = gridfs.GridFS(usr)
+fs = gridfs.GridFS(usr)
 
 github = oauth.remote_app(
     'github', consumer_key=os.environ['GITHUB_CLIENTID'], #your web app's "username" for github's OAuth
@@ -55,15 +55,20 @@ def render_home():
 
 @app.route('/posted', methods=['POST'])
 def post():
-    #if not request.form['message'] == "" and not request.form['message'].isspace():
-    #    if not temp = None:
-    #         data = { "_id": ObjectId(), "pic_id": temp, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
-    #    else:
-    #        data = { "_id": ObjectId(), "pic_id": 0, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}         
-    #else:
-    #    return return render_template('home.html', posts_to_html("Invalid"))
+    if 'file' in request.files:
+        temp_file_id = fs.put(request.files['file'])
+    else:
+        temp_file_id = None
         
-    #collection.insert(data)
+    if not request.form['message'] == "" and not request.form['message'].isspace():
+        if not temp_file_id = None:
+             data = { "_id": ObjectId(), "pic_id": temp, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
+        else:
+            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}         
+    else:
+        return return render_template('home.html', posts_to_html("Invalid"))
+        
+    collection.insert(data)
     
     return redirect(url_for("home"))
 
