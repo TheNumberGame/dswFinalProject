@@ -1,7 +1,3 @@
-Link to the heroku webpage
+Link to the heroku webpage: https://dswfinalproject.herokuapp.com/login/authorized?code=6f15763eaab59d39388c
 
-
-
-
-
-https://dswfinalproject.herokuapp.com/login/authorized?code=6f15763eaab59d39388c
+Note: Project failed.
