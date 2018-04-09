@@ -10,5 +10,4 @@ Flask-OAuthlib
 pymongo
 datetime
 bson
-gridfs
-werkzeug
+
