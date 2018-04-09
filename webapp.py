@@ -50,7 +50,7 @@ def login():
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
 
 @app.route('/')
-def render_home():
+def home():
         return render_template('home.html', message=posts_to_html(collection.find()))
 
 @app.route('/posted', methods=['POST'])
