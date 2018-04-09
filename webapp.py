@@ -56,7 +56,6 @@ def home():
 @app.route('/posted', methods=['POST'])
 def post():
     if 'file' in request.files:
-        print(fs.put(request.files['file']))
         temp_file_id = fs.put(request.files['file'])
     else:
         temp_file_id = None
