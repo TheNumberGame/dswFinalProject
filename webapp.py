@@ -56,6 +56,7 @@ def home():
 @app.route('/posted', methods=['POST'])
 def post():
     if 'file' in request.files:
+        print(fs.put(request.files['file']))
         temp_file_id = fs.put(request.files['file'])
     else:
         temp_file_id = None
@@ -73,7 +74,6 @@ def post():
     return redirect(url_for("home"))
 
 def posts_to_html(data = None):
-     print(data)
      option = ""
      try:
           session['user_data']
