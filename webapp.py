@@ -87,7 +87,7 @@ def posts_to_html(data = None):
                     else:
                          option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
           except:
-               return data
+               return option
      except:
           try:
                for i in data.sort([("date", -1)]):
@@ -107,8 +107,8 @@ def delPost():
 @app.route("/img/<filename>")
 def post_img(filename):
      image = fs.get_latest_version(filename=filename)
-     #response.content_type = 'image/'+ filename.split('.')[1]
-     #return image
+     response.content_type = 'image/'+ filename.split('.')[1]
+     return image
 
 @app.route('/logout')
 def logout():
