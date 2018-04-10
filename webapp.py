@@ -81,7 +81,7 @@ def posts_to_html(data = None):
           try:
                for i in data.sort([("date", -1)]):
                     if not i['pic_id'] == 0:
-                         option += Markup("<img src=\"\" alt=\"picture\" height=\"50\" width=\"50\">")
+                         option += Markup("<img src=\"/img/"+ fs.get(i['pic_id']).filename+"\" alt=\"picture\" height=\"50\" width=\"50\">")
                     option += Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + i["name"] + "</span>: " + i["message"]) 
                     if i['name'] == session['user_data']['login']:
                          option += Markup("<br><button type=\"submit\" name=\"DeletePost\" value= \""+ str(i["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
@@ -105,6 +105,11 @@ def delPost():
    
     return redirect(url_for("home"))
 
+@app.route("/img/<filename>")
+def post_img(filename):
+     image = fs.get_latest_version(filename=filename)
+     
+     return image
 
 @app.route('/logout')
 def logout():
