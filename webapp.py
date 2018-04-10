@@ -117,7 +117,7 @@ def delPost():
 
 @app.route("/img/<filename>")
 def post_img(filename):
-     image = fs.get_latest_version(filename=filename)
+     image = fs.find_one(filename=filename)
      response.content_type = 'image/'+ filename.split('.')[1]
      return image
 
