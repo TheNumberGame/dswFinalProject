@@ -57,7 +57,7 @@ def home():
 
 @app.route('/posted', methods=['POST'])
 def post():
-    if 'file' in request.files and check_extension(request.files['file']):
+    if 'file' in request.files and check_extension(request.files['file'].filename):
         fl = request.files['file']
         temp_file_id = fs.put(fl, filename=fl.filename)
     else:
