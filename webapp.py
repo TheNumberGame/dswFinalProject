@@ -70,6 +70,8 @@ def post():
         
     collection.insert(data)
     
+    print("file: "+fs.get(temp_file_id).filename)    
+        
     return redirect(url_for("home"))
 
 def posts_to_html(data = None):
