@@ -79,7 +79,7 @@ def post():
 def check_extension(ext):
      if ext.split(".")[1] in VALID_EXTENSIONS:
         return True
-     return False:
+     return False
         
 
 def posts_to_html(data = None):
