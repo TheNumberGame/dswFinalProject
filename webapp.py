@@ -60,6 +60,7 @@ def post():
     else:
         temp_file_id = None
     print("Working?")
+    print("file: "+str(fs.get(temp_file_id).filename))
     if not request.form['message'] == "" and not request.form['message'].isspace():
         if not temp_file_id == None:
              data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
@@ -69,9 +70,7 @@ def post():
         return render_template('home.html', message=posts_to_html("Invalid"))
         
     collection.insert(data)
-    
-    print("file: "+fs.get(temp_file_id).filename)    
-        
+   
     return redirect(url_for("home"))
 
 def posts_to_html(data = None):
