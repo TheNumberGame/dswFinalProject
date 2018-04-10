@@ -41,7 +41,7 @@ github = oauth.remote_app(
     authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
 )
 
-EXTENSIONS = ['jpeg', 'png']
+VALID_EXTENSIONS = ['jpeg', 'png']
 
 @app.context_processor
 def inject_logged_in():
@@ -77,7 +77,7 @@ def post():
 
 
 def check_extension(ext):
-     if ext.split(".")[1] in EXTENSIONS:
+     if ext.split(".")[1] in VALID_EXTENSIONS:
         return True
      return False:
         
