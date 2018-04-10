@@ -41,6 +41,8 @@ github = oauth.remote_app(
     authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
 )
 
+EXTENSIONS = ['jpeg', 'png']
+
 @app.context_processor
 def inject_logged_in():
     return {"logged_in":('github_token' in session)}
@@ -55,7 +57,7 @@ def home():
 
 @app.route('/posted', methods=['POST'])
 def post():
-    if 'file' in request.files:
+    if 'file' in request.files and check_extension(request.files['file']):
         fl = request.files['file']
         temp_file_id = fs.put(fl, filename=fl.filename)
     else:
@@ -72,6 +74,13 @@ def post():
     collection.insert(data)
    
     return redirect(url_for("home"))
+
+
+def check_extension(ext):
+     if ext.split(".")[1] in EXTENSIONS:
+        return True
+     return False:
+        
 
 def posts_to_html(data = None):
      option = ""
@@ -96,6 +105,7 @@ def posts_to_html(data = None):
                return data
      return option
 
+
 @app.route('/b', methods=['POST'])
 def delPost():
     docId = request.form['DeletePost']
@@ -104,11 +114,13 @@ def delPost():
    
     return redirect(url_for("home"))
 
+
 @app.route("/img/<filename>")
 def post_img(filename):
      image = fs.get_latest_version(filename=filename)
      response.content_type = 'image/'+ filename.split('.')[1]
      return image
+
 
 @app.route('/logout')
 def logout():
