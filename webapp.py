@@ -100,6 +100,8 @@ def posts_to_html(data = None):
      except:
           try:
                for i in data.sort([("date", -1)]):
+                    if not i['pic_id'] == "0":
+                         option += Markup("<img src=\"/img/"+ str(i['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">")
                     option += Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + i["name"] + "</span>: " + i["message"]+"<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>") 
           except:
                return data
