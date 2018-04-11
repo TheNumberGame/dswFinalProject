@@ -107,6 +107,7 @@ def posts_to_html(data = None):
                          option += Markup("<img src=\"/img/"+ str(i['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ i["message"])
                     else:
                          option += i["message"]
+                    option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
           except:
                return option
      return option
