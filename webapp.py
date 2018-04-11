@@ -63,7 +63,7 @@ def post():
     else:
         temp_file_id = None
         
-    if not request.form['message'] == "" and not request.form['message'].isspace():
+    if not request.form['message'] == "" and not request.form['message'].isspace() or not temp_file_id == None:
         if not temp_file_id == None:
              data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
         else:
@@ -110,7 +110,7 @@ def posts_to_html(data = None):
 def delPost():
     doc_id = request.form['DeletePost']
     
-    db_doc = collection.find_one_and_delete_one({'_id': ObjectId(doc_Id)})
+    db_doc = collection.find_one_and_delete_one({'_id': ObjectId(doc_id)})
     if not db_doc['pic_id'] == '0':
          fs.delete({'_id': ObjectId(db_doc['pic_id'])})
    
