@@ -14,8 +14,9 @@
 {% else %}
   <p>Must be logged in.</p>
 {% endif %}
-<form action="/b" method="post">
 {{ message }}
+<form action="/b" method="post">
+{{ posts }}
 </form>
 
 {% endblock %}
