@@ -88,9 +88,11 @@ def posts_to_html(data = None):
           session['user_data']
           try:
                for i in data.sort([("date", -1)]):
+                    option += Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + i["name"] + "</span>: ")
                     if not i['pic_id'] == "0":
-                         option += Markup("<img src=\"/img/"+ str(i['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">")
-                    option += Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + i["name"] + "</span>: " + i["message"]) 
+                         option += Markup("<img src=\"/img/"+ str(i['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ i["message"])
+                    else:
+                         option += i["message"]
                     if i['name'] == session['user_data']['login']:
                          option += Markup("<br><button type=\"submit\" name=\"DeletePost\" value= \""+ str(i["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
                     else:
@@ -100,11 +102,13 @@ def posts_to_html(data = None):
      except:
           try:
                for i in data.sort([("date", -1)]):
+                    option += Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + i["name"] + "</span>: ")
                     if not i['pic_id'] == "0":
-                         option += Markup("<img src=\"/img/"+ str(i['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">")
-                    option += Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + i["name"] + "</span>: " + i["message"]+"<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>") 
+                         option += Markup("<img src=\"/img/"+ str(i['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ i["message"])
+                    else:
+                         option += i["message"]
           except:
-               return data
+               return option
      return option
 
 
