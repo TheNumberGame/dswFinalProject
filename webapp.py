@@ -41,7 +41,7 @@ github = oauth.remote_app(
     authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
 )
 
-VALID_EXTENSIONS = ['jpeg', 'png']
+VALID_EXTENSIONS = ['jpeg', 'png', 'jpg']
 
 @app.context_processor
 def inject_logged_in():
