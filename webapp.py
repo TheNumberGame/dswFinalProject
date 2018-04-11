@@ -108,9 +108,13 @@ def posts_to_html(data = None):
 
 @app.route('/b', methods=['POST'])
 def delPost():
-    docId = request.form['DeletePost']
+    doc_id = request.form['DeletePost']
     
-    collection.delete_one({'_id': ObjectId(docId)})
+    db_doc = collection.find_one_and_delete_one({'_id': ObjectId(docId)})
+    try:
+         fs.delete({'_id': ObjectId(db_doc['pic_id']))
+    except:
+         return redirect(url_for("home"))
    
     return redirect(url_for("home"))
 
