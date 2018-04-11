@@ -152,7 +152,7 @@ def authorized():
             session.clear()
             print(inst)
             message='Unable to login, please try again.  '
-    return render_template('home.html', message=message)
+    return render_template('home.html', message=message, posts=posts_to_html(collection.find()))
 
 @github.tokengetter
 def get_github_oath_token():
