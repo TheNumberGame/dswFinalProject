@@ -16,8 +16,8 @@ from bson.objectid import ObjectId
 app = Flask(__name__)
 
 socketio = SocketIO(app, async_mode=None)
-thread = None
-thread_lock = Lock()
+#thread = None
+#thread_lock = Lock()
 
 app.debug = True
 
