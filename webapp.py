@@ -87,7 +87,7 @@ def post():
     collection.insert(data)
     
     socketio.emit('update', single_post_to_html(data))
-    #return redirect(url_for("home"))
+    return redirect(url_for("home"))
 
 def check_extension(ext):
      if ext.split(".")[1] in VALID_EXTENSIONS:
