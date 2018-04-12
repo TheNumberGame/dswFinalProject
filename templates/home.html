@@ -1,6 +1,14 @@
 {% extends 'layout.html' %}
 {% block title %}Home{% endblock %}
-
+{% block updatePost %} 
+     <script type="text/javascript" charset="utf-8">
+         $(document).ready(function(){
+             var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+             socket.on('update', function(mes){
+              $('#content').append(mes)
+             });
+         });
+    </script>{% endblock%}
 {% block content %}
 
 {% if 'github_token' in session %}
