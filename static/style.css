@@ -11,7 +11,7 @@
 .imgPost
 {
      display: block;
-     border-radius: 50%;
+     border-radius: 8px;
      max-height: 300px;
      max-width: 500px;
 }
