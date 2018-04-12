@@ -61,11 +61,11 @@ def login():
 def home():
         return render_template('home.html', posts=posts_to_html(collection.find()))
 
-@socketio.on('connect')
-def start_thread():
-     global thread
-     with thread_lock:
-          if thread == None:
+#@socketio.on('connect')
+#def start_thread():
+#     global thread
+#     with thread_lock:
+#          if thread == None:
                #thread = socketio.start_background_task(target=post)
        
 @app.route('/posted', methods=['POST'])
