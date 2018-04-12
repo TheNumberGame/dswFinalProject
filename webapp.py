@@ -33,7 +33,7 @@ url = 'mongodb://{}:{}@{}:{}/{}'.format(
 clt = pymongo.MongoClient(url)
 usr = clt[os.environ["MONGO_DBNAME"]]
 collection = usr['chat']
-
+user_info = usr['user_data'] 
 fs = gridfs.GridFS(usr, 'pictures')
 
 github = oauth.remote_app(
@@ -104,9 +104,9 @@ def single_post_to_html(data = None):
           if data['name'] == session['user_data']['login']:
                option += Markup("<br><button type=\"submit\" name=\"DeletePost\" value= \""+ str(data["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ str(data["date"]) +"</p>")
           else:
-               option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(data["date"]) +"</p>")
+               option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ datetime.astimezone(data["date"]) +"</p>")
      else:
-          option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(data["date"]) +"</p>")
+          option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ datetime.astimezone(data["date"]) +"</p>")
      return option
         
 def posts_to_html(data = None):
@@ -152,6 +152,7 @@ def authorized():
         try:
             session['github_token'] = (resp['access_token'], '') #save the token to prove that the user logged in
             session['user_data']=github.get('user').data
+            user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0'})
             message='You were successfully logged in as ' + session['user_data']['login']
         except Exception as inst:
             session.clear()
