@@ -91,9 +91,9 @@ def single_post_to_html(data = None):
           if data['name'] == session['user_data']['login']:
                option += Markup("<br><button type=\"submit\" name=\"DeletePost\" value= \""+ str(data["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ str(data["date"]) +"</p>")
           else:
-               option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
+               option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(data["date"]) +"</p>")
      else:
-          option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
+          option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(data["date"]) +"</p>")
      return option
         
 def posts_to_html(data = None):
