@@ -11,6 +11,7 @@
 
 .imgPost
 {
+     border: 1px solid #ddd;
      display: block;
      border-radius: 8px;
      max-height: 300px;
