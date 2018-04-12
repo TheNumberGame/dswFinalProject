@@ -66,7 +66,7 @@ def start_thread():
      global thread
      with thread_lock:
           if thread == None:
-               thread = socketio.start_background_task(target=post)
+               #thread = socketio.start_background_task(target=post)
        
 @app.route('/posted', methods=['POST'])
 def post():
@@ -86,7 +86,7 @@ def post():
         
     collection.insert(data)
     
-    socketio.emit('update', single_post_to_html(data))
+    #socketio.emit('update', single_post_to_html(data))
     return redirect(url_for("home"))
 
 def check_extension(ext):
