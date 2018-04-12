@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, session, request, jsonify, Markup, escape
 from flask_oauthlib.client import OAuth
 from flask import render_template
+form flask_socketio import SocketIO, emit
 
 import pprint
 import os
@@ -12,6 +13,8 @@ from bson.objectid import ObjectId
 
 
 app = Flask(__name__)
+
+socketio = SocketIO(app, async_mode=None)
 
 app.debug = True
 
@@ -72,9 +75,9 @@ def post():
         return render_template('home.html', message=posts_to_html("Invalid"))
         
     collection.insert(data)
-   
-    return redirect(url_for("home"))
-
+    
+    emit('update', single_post_to_html(data))
+    #return redirect(url_for("home"))
 
 def check_extension(ext):
      if ext.split(".")[1] in VALID_EXTENSIONS:
