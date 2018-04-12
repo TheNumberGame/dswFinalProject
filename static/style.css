@@ -10,7 +10,8 @@
 
 .imgPost
 {
-     display: block;
+     //display: block;
+     border-radius: 8px;
      max-height: 300px;
      max-width: 500px;
 }
