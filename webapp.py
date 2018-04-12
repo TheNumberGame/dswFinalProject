@@ -63,7 +63,7 @@ def home():
 
 @socketio.on('connect')
 def start_thread():
-     Global thread
+     global thread
      with thread_lock:
           if thread == None:
                thread = socketio.start_background_task(target=post)
