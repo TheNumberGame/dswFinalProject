@@ -81,37 +81,26 @@ def check_extension(ext):
         return True
      return False
         
-
+def single_post_to_html(data = None):
+     option = Markup("<p class=\"mes\" ><span classstyle=\"color:blue;\">" + data["name"] + "</span>: ")
+     if not data['pic_id'] == '0':
+          option += Markup("<img src=\"/img/"+ str(data['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ data["message"])
+     else:
+          option += data['message']
+     if 'user_data' in session:
+          if data['name'] == session['user_data']['login']:
+               option += Markup("<br><button type=\"submit\" name=\"DeletePost\" value= \""+ str(data["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ str(data["date"]) +"</p>")
+          else:
+               option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
+     else:
+          option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
+     return option
+        
 def posts_to_html(data = None):
      option = ""
-     try:
-          session['user_data']
-          try:
-               for i in data.sort([("date", -1)]):
-                    option += Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + i["name"] + "</span>: ")
-                    if not i['pic_id'] == "0":
-                         option += Markup("<img src=\"/img/"+ str(i['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ i["message"])
-                    else:
-                         option += i["message"]
-                    if i['name'] == session['user_data']['login']:
-                         option += Markup("<br><button type=\"submit\" name=\"DeletePost\" value= \""+ str(i["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
-                    else:
-                         option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
-          except:
-               return option
-     except:
-          try:
-               for i in data.sort([("date", -1)]):
-                    option += Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + i["name"] + "</span>: ")
-                    if not i['pic_id'] == "0":
-                         option += Markup("<img src=\"/img/"+ str(i['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ i["message"])
-                    else:
-                         option += i["message"]
-                    option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ str(i["date"]) +"</p>")
-          except:
-               return option
+     for i in data.sort([('data', -1)]):
+          option += single_post_to_html(i)
      return option
-
 
 @app.route('/b', methods=['POST'])
 def delPost():
