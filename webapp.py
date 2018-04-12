@@ -99,7 +99,7 @@ def single_post_to_html(data = None):
 def posts_to_html(data = None):
      option = ""
      try:
-          for i in data.sort([('data': -1)]):
+          for i in data.sort({'data': -1}):
                option += single_post_to_html(i)
      except:
           option += data
