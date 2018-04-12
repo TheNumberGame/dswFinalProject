@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, session, request, jsonify, Markup, escape
 from flask_oauthlib.client import OAuth
 from flask import render_template
-form flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit
 
 import pprint
 import os
