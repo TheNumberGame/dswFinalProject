@@ -10,3 +10,4 @@ Flask-OAuthlib
 pymongo
 datetime
 bson
+flask_socketio
