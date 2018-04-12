@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for, session, request, jsonify, Markup, e
 from flask_oauthlib.client import OAuth
 from flask import render_template
 from flask_socketio import SocketIO, emit
+from threading import Lock
 
 import pprint
 import os
@@ -15,6 +16,8 @@ from bson.objectid import ObjectId
 app = Flask(__name__)
 
 socketio = SocketIO(app, async_mode=None)
+thread = None
+thread_lock = Lock()
 
 app.debug = True
 
@@ -58,6 +61,13 @@ def login():
 def home():
         return render_template('home.html', posts=posts_to_html(collection.find()))
 
+@socketio.on('connect')
+def start_thread():
+     Global thread
+     with thread_lock:
+          if thread == None:
+               thread = socketio.start_background_task(target=post)
+       
 @app.route('/posted', methods=['POST'])
 def post():
     if 'file' in request.files and check_extension(request.files['file'].filename):
@@ -76,7 +86,7 @@ def post():
         
     collection.insert(data)
     
-    emit('update', single_post_to_html(data))
+    socketio.emit('update', single_post_to_html(data))
     #return redirect(url_for("home"))
 
 def check_extension(ext):
