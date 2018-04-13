@@ -65,6 +65,10 @@ def home():
 def profile():
         return render_template('profile.html')
 
+@app.route('/friends')
+def friends():
+        return render_template('friends.html')
+
 #@socketio.on('connect')
 #def start_thread():
 #     global thread
