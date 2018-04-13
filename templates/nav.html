@@ -12,12 +12,12 @@
     <!--</div>-->
       
       <ul class="nav navbar-nav navbar-right">
+	<li><a href="/profile">Profile</a></li>
+	<li><a href="/friends">Friends</a></li>
 	{% if logged_in %}
         <li><p class="navbar-text">Github userid: {{ session['user_data']['login']}}</li>
 	{% endif %}
         <li>
-	  <a href="/profile">Profile</a>
-	  <a href="/friends">Friends</a>
 	  {% if logged_in %}
 	  <a href="/logout">Logout</a>
 	  {% else %}
