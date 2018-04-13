@@ -61,6 +61,10 @@ def login():
 def home():
         return render_template('home.html', posts=posts_to_html(collection.find()))
 
+@app.route('/profile')
+def profile():
+        return render_template('profile.html')
+
 #@socketio.on('connect')
 #def start_thread():
 #     global thread
