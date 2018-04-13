@@ -16,6 +16,7 @@
         <li><p class="navbar-text">Github userid: {{ session['user_data']['login']}}</li>
 	{% endif %}
         <li>
+	  <a href="/profile">Profile</a>
 	  {% if logged_in %}
 	  <a href="/logout">Logout</a>
 	  {% else %}
