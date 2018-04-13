@@ -9,7 +9,7 @@ import os
 import json
 import pymongo
 import gridfs
-import datetime
+from datetime import datetime
 from bson.objectid import ObjectId
 
 
@@ -78,9 +78,9 @@ def post():
         
     if not request.form['message'] == "" and not request.form['message'].isspace() or not temp_file_id == None:
         if not temp_file_id == None:
-             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.datetime.now())}
+             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
         else:
-            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.datetime.now())}         
+            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}         
     else:
         return render_template('home.html', message=posts_to_html("Invalid"))
         
@@ -104,9 +104,9 @@ def single_post_to_html(data = None):
           if data['name'] == session['user_data']['login']:
                option += Markup("<br><button type=\"submit\" name=\"DeletePost\" value= \""+ str(data["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ str(data["date"]) +"</p>")
           else:
-               option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ datetime.astimezone(data["date"]) +"</p>")
+               option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ data["date"] +"</p>")
      else:
-          option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ datetime.astimezone(data["date"]) +"</p>")
+          option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ data["date"] +"</p>")
      return option
         
 def posts_to_html(data = None):
