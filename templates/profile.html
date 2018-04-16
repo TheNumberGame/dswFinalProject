@@ -3,4 +3,11 @@
 
 {% block content %}
 <br>test</br>
+<form action="/posted" enctype="multipart/form-data" method="post">
+  <textarea name="profile pic" style="width:50%; height:50px;"></textarea>
+  <br>
+  <input name="file" type="file">
+  <br>
+  <input type="submit" value="submit">
+</form>
 {% endblock %}
