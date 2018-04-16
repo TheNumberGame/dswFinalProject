@@ -141,7 +141,7 @@ def update_profile_pic():
     else:
         temp_file_id = '0'
     
-    user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$inc': {'profile_picture': str(temp_file_id)}})
+    user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'profile_picture': str(temp_file_id)}})
     return redirect(url_for('profile'))
 
 
