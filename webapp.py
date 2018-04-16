@@ -64,7 +64,7 @@ def home():
 def profile():
         if 'user_data' in session: 
             data = user_info.find_one({'user_name': session['user_data']['login']})
-            if not data['pic_id'] == '0':
+            if not data['profile_picture'] == '0':
                 option = Markup("<img src=\"/img/"+ str(data['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ data["message"])
             else:
                  option = ''
