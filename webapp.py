@@ -134,7 +134,7 @@ def post_img(filename = None):
      return image.read()
 
 @app.route("/proPic", methods=['POST'])
-def update_profile_pic()
+def update_profile_pic():
     if 'file' in request.files and check_extension(request.files['file'].filename):
         fl = request.files['file']
         temp_file_id = fs.put(fl, filename=fl.filename)
