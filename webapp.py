@@ -16,8 +16,7 @@ from bson.objectid import ObjectId
 app = Flask(__name__)
 
 socketio = SocketIO(app, async_mode=None)
-#thread = None
-#thread_lock = Lock()
+
 
 app.debug = True
 
@@ -37,14 +36,14 @@ user_info = usr['user_data']
 fs = gridfs.GridFS(usr, 'pictures')
 
 github = oauth.remote_app(
-    'github', consumer_key=os.environ['GITHUB_CLIENTID'], #your web app's "username" for github's OAuth
-    consumer_secret=os.environ['GITHUB_CLIENT_SECRET'],#your web app's "password" for github's OAuth
-    request_token_params={'scope': 'user:email'}, #request read-only access to the user's email.  For a list of possible scopes, see developer.github.com/apps/building-oauth-apps/scopes-for-oauth-apps
+    'github', consumer_key=os.environ['GITHUB_CLIENTID'], 
+    consumer_secret=os.environ['GITHUB_CLIENT_SECRET'],
+    request_token_params={'scope': 'user:email'}, 
     base_url='https://api.github.com/',
     request_token_url=None,
     access_token_method='POST',
     access_token_url='https://github.com/login/oauth/access_token',  
-    authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
+    authorize_url='https://github.com/login/oauth/authorize' 
 )
 
 VALID_EXTENSIONS = ['jpeg', 'png', 'jpg']
@@ -55,7 +54,7 @@ def inject_logged_in():
 
 @app.route('/login')
 def login():   
-    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
+    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
 
 @app.route('/')
 def home():
@@ -68,13 +67,6 @@ def profile():
 @app.route('/friends')
 def friends():
         return render_template('friends.html')
-
-#@socketio.on('connect')
-#def start_thread():
-#     global thread
-#     with thread_lock:
-#          if thread == None:
-               #thread = socketio.start_background_task(target=post)
        
 @app.route('/posted', methods=['POST'])
 def post():
@@ -94,7 +86,6 @@ def post():
         
     collection.insert(data)
     
-    #socketio.emit('update', single_post_to_html(data))
     return redirect(url_for("home"))
 
 def check_extension(ext):
@@ -140,8 +131,18 @@ def delPost():
 @app.route("/img/<filename>")
 def post_img(filename = None):
      image = fs.find_one({'_id': ObjectId(filename)})
-     #response.content_type = 'image/'+ filename.split('.')[1]
      return image.read()
+
+@app.route("/proPic", methods=['POST'])
+def update_profile_pic()
+    if 'file' in request.files and check_extension(request.files['file'].filename):
+        fl = request.files['file']
+        temp_file_id = fs.put(fl, filename=fl.filename)
+    else:
+        temp_file_id = '0'
+    
+    user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$inc': {'profile_picture': str(temp_file_id)}})
+    return redirect(url_for('profile'))
 
 
 @app.route('/logout')
@@ -158,7 +159,7 @@ def authorized():
         message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)      
     else:
         try:
-            session['github_token'] = (resp['access_token'], '') #save the token to prove that the user logged in
+            session['github_token'] = (resp['access_token'], '')
             session['user_data']=github.get('user').data
             user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0'})
             message='You were successfully logged in as ' + session['user_data']['login']
