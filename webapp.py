@@ -31,9 +31,9 @@ url = 'mongodb://{}:{}@{}:{}/{}'.format(
         os.environ["MONGO_DBNAME"])
 clt = pymongo.MongoClient(url)
 usr = clt[os.environ["MONGO_DBNAME"]]
-collection = usr['chat']
-user_info = usr['user_data'] 
-fs = gridfs.GridFS(usr, 'pictures')
+collection = usr['chat'] #This is contains all posts made
+user_info = usr['user_data'] #contains user data
+fs = gridfs.GridFS(usr, 'pictures') #This contains the pictures
 
 github = oauth.remote_app(
     'github', consumer_key=os.environ['GITHUB_CLIENTID'], 
@@ -62,7 +62,15 @@ def home():
 
 @app.route('/profile')
 def profile():
-        return render_template('profile.html')
+        if 'user_data' in session: 
+            data = user_info.find_one('user_name': session['user_data']['login'])
+            if not data['pic_id'] == '0':
+                option = Markup("<img src=\"/img/"+ str(data['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ data["message"])
+            else:
+                 option = ''
+        else:
+            option = ''
+        return render_template('profile.html', profile_pic = option)
 
 @app.route('/friends')
 def friends():
