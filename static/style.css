@@ -28,5 +28,11 @@ h1{
 
 .proPicture
 {
-
+	border: 1px solid #ddd;
+	display: block;
+	border-radius: 50%;
+	max-height: 200px;
+	max-width: 200px;
+	margin-left: auto;
+	
 }
