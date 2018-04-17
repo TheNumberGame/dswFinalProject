@@ -62,24 +62,16 @@ def home():
 
 @app.route('/profile/<user_name>')
 def profile(user_name = None):
-        #if 'user_data' in session: 
-        #    data = user_info.find_one({'user_name': session['user_data']['login']})
-        #    if not data['profile_picture'] == '0':
-        #        option = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
-        #    else:
-        #         option = ''
-        #else:
-        #    option = ''
         data = user_info.find_one({'user_name': user_name})
-        option = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
+        profile_img = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
         if 'user_data' in session:
             if session['user_data']['login'] == user_name:
-                option += Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"submit\"></form>")
+                option = Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"submit\"></form>")
             elif user_name in user_info.find_one({'user_name': session['user_data']['login']})['friends']:
-                option += Markup("<form action=\"/unFriend\" method=\"post\"><br><button type=\"submit\" name=\"unFriend\" value= \""+ user_name +"\">Delete Friend</button></form>")
+                option = Markup("<form action=\"/unFriend\" method=\"post\"><br><button type=\"submit\" name=\"unFriend\" value= \""+ user_name +"\">Delete Friend</button></form>")
             else:
-                option += Markup("<form action=\"/addFriend\" method=\"post\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ user_name +"\">Add Friend</button></form>")
-        return render_template('profile.html', profile_pic = option)
+                option = Markup("<form action=\"/addFriend\" method=\"post\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ user_name +"\">Add Friend</button></form>")
+        return render_template('profile.html', profile_pic = profile_img, setting = option)
 
 @app.route('/unFriend')
 def unfriend():
