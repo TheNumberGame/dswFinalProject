@@ -4,12 +4,7 @@
 <h1>Profile</h1>
 {{ profile_pic }}
 {% if 'github_token' in session %}
-<form action="/proPic" enctype="multipart/form-data" method="post">
-  <br>
-  <input name="file" type="file">
-  <br>
-  <input type="submit" value="submit">
-</form>
+{% setting %}
 {% else %}
 <p>Must be logged in.</p>
 {% endif %}
