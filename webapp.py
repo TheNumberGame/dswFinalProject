@@ -64,7 +64,7 @@ def home():
 def profile(user_name = None):
         data = user_info.find_one({'user_name': user_name})
         if not data['profile_picture'] == '0':
-        profile_img = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
+            profile_img = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
         if 'user_data' in session:
             if session['user_data']['login'] == user_name:
                 option = Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"submit\"></form>")
