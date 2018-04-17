@@ -65,7 +65,7 @@ def profile():
         if 'user_data' in session: 
             data = user_info.find_one({'user_name': session['user_data']['login']})
             if not data['profile_picture'] == '0':
-                option = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"imgPost\">")
+                option = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
             else:
                  option = ''
         else:
