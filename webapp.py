@@ -15,7 +15,7 @@ from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
-socketio = SocketIO(app, async_mode=None)
+#socketio = SocketIO(app, async_mode=None)
 
 
 app.debug = True
@@ -60,17 +60,27 @@ def login():
 def home():
         return render_template('home.html', posts=posts_to_html(collection.find()))
 
-@app.route('/profile')
-def profile():
-        if 'user_data' in session: 
-            data = user_info.find_one({'user_name': session['user_data']['login']})
-            if not data['profile_picture'] == '0':
-                option = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
+@app.route('/profile/<user_name>')
+def profile(user_name = None):
+        #if 'user_data' in session: 
+        #    data = user_info.find_one({'user_name': session['user_data']['login']})
+        #    if not data['profile_picture'] == '0':
+        #        option = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
+        #    else:
+        #         option = ''
+        #else:
+        #    option = ''
+        data = user_info.find_one({'user_name': user_name})
+        option = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
+        if 'user_data' in session:
+            if session['user_data']['login'] == user_name:
+                option += Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"submit\"></form>")
+            elif user_name in user_info.find_one({'user_name': session['user_data']['login']})['friends']:
+                option += Markup("<form action=\"unFriend\" method=\"post\"><br><button type=\"submit\" name=\"unFriend\" value= \""+ user_name +"\">Delete Friend</button></form>")
             else:
-                 option = ''
-        else:
-            option = ''
+                option += Markup("<form action=\"addFriend\" method=\"post\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ user_name +"\">Add Friend</button></form>")
         return render_template('profile.html', profile_pic = option)
+
 
 @app.route('/friends')
 def friends():
@@ -102,7 +112,7 @@ def check_extension(ext):
      return False
         
 def single_post_to_html(data = None):
-     option = Markup("<p class=\"mes\" ><span style=\"color:blue;\">" + data["name"] + "</span>: ")
+     option = Markup("<p class=\"mes\" ><span style=\"color:blue;\"><a href=\"/profile/"+ data['name'] +"\">" + data["name"] + "</a></span>: ")
      if not data['pic_id'] == '0':
           option += Markup("<img src=\"/img/"+ str(data['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ data["message"])
      else:
@@ -170,7 +180,7 @@ def authorized():
             session['github_token'] = (resp['access_token'], '')
             session['user_data']=github.get('user').data
             if user_info.find_one({'user_name': session['user_data']['login']}) == None:
-                user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0','profile_description': '0', 'friends': '0'})
+                user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0','profile_description': '0', 'friends': []})
             message='You were successfully logged in as ' + session['user_data']['login']
         except Exception as inst:
             session.clear()
