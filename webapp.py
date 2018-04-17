@@ -61,7 +61,7 @@ def home():
         return render_template('home.html', posts=posts_to_html(collection.find()))
 
 @app.route('/profile/<name>')
-def profile(user_name = None):
+def profile(name = None):
         data = user_info.find_one({'user_name': user_name})
         profile_img = ''
         option = ''
