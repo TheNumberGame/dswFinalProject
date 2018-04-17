@@ -169,7 +169,8 @@ def authorized():
         try:
             session['github_token'] = (resp['access_token'], '')
             session['user_data']=github.get('user').data
-            user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0'})
+            if user_info.find_one({'user_name': session['user_data']['login']}) == None:
+                user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0'})
             message='You were successfully logged in as ' + session['user_data']['login']
         except Exception as inst:
             session.clear()
