@@ -2,8 +2,8 @@
 {% block title %}Profile{% endblock %}
 {% block content %}
 <h1>Profile</h1>
-{% if 'github_token' in session %}
 {{ profile_pic }}
+{% if 'github_token' in session %}
 <form action="/proPic" enctype="multipart/form-data" method="post">
   <br>
   <input name="file" type="file">
