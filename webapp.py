@@ -76,11 +76,25 @@ def profile(user_name = None):
             if session['user_data']['login'] == user_name:
                 option += Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"submit\"></form>")
             elif user_name in user_info.find_one({'user_name': session['user_data']['login']})['friends']:
-                option += Markup("<form action=\"unFriend\" method=\"post\"><br><button type=\"submit\" name=\"unFriend\" value= \""+ user_name +"\">Delete Friend</button></form>")
+                option += Markup("<form action=\"/unFriend\" method=\"post\"><br><button type=\"submit\" name=\"unFriend\" value= \""+ user_name +"\">Delete Friend</button></form>")
             else:
-                option += Markup("<form action=\"addFriend\" method=\"post\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ user_name +"\">Add Friend</button></form>")
+                option += Markup("<form action=\"/addFriend\" method=\"post\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ user_name +"\">Add Friend</button></form>")
         return render_template('profile.html', profile_pic = option)
 
+@app.route('/unFriend')
+def unfriend():
+    user_name = request.form['unFriend']
+    user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['friends']
+    user_client_friends.remove(user_name)
+    user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'friends': user_client_friends}})
+    return redirect(url_for('profile'))
+
+@app.route('/addFriend')
+    user_name = request.form['unFriend']
+    user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['friends']
+    user_client_friends.append(user_name)
+    user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'friends': user_client_friends}})
+    return redirect(url_for('profile'))
 
 @app.route('/friends')
 def friends():
