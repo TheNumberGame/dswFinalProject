@@ -82,6 +82,7 @@ def unfriend():
     return redirect(url_for('profile'))
 
 @app.route('/addFriend')
+def addFriend():
     user_name = request.form['unFriend']
     user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['friends']
     user_client_friends.append(user_name)
