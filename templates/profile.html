@@ -2,6 +2,7 @@
 {% block title %}Profile{% endblock %}
 {% block content %}
 <h1>Profile</h1>
+{% if 'github_token' in session %}
 {{ profile_pic }}
 <form action="/proPic" enctype="multipart/form-data" method="post">
   <br>
@@ -9,4 +10,7 @@
   <br>
   <input type="submit" value="submit">
 </form>
+{% else %}
+<p>Must be logged in.</p>
+{% endif %}
 {% endblock %}
