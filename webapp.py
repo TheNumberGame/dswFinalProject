@@ -122,7 +122,7 @@ def check_extension(ext):
      return False
         
 def single_post_to_html(data = None):
-     option = Markup("<p class=\"mes\" ><span style=\"color:blue;\"><a href=\"/profile/"+ data['name'] +"\">" + data["name"] + "</a></span>: ")
+     option = Markup("<p class=\"mes\" ><span style=\"color:blue;\"><a href=\"/profile/"+ str(data['name']) +"\">" + data["name"] + "</a></span>: ")
      if not data['pic_id'] == '0':
           option += Markup("<img src=\"/img/"+ str(data['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ data["message"])
      else:
