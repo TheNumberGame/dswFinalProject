@@ -62,7 +62,7 @@ def home():
 
 @app.route('/profile/<name>')
 def profile(name = None):
-        data = user_info.find_one({'user_name': name})
+        data = user_info.find_one({'user_name': str(name)})
         print(data, name)
         profile_img = ''
         option = ''
