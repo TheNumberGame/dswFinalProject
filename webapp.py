@@ -93,7 +93,7 @@ def addFriend():
     user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['friends']
     user_client_friends.append(user_name)
     user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'friends': user_client_friends}})
-    return redirect('/profile'+user_name)
+    return redirect('/profile/'+user_name)
 
 @app.route('/friends')
 def friends():
