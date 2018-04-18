@@ -97,7 +97,12 @@ def addFriend():
 
 @app.route('/friends')
 def friends():
-        return render_template('friends.html')
+        data = user_info.find_one({'user_name': session['user_data']['login']})
+        option = Markup("<ul>")
+        for i in data['friends']:
+            option += Markup("<li>"+ i +"</li>")
+        option += Markup("</ul>")
+        return render_template('friends.html', friend = option)
        
 @app.route('/posted', methods=['POST'])
 def post():
