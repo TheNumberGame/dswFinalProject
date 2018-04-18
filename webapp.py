@@ -74,9 +74,9 @@ def profile(name = None):
             if session['user_data']['login'] == name:
                 option = Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"submit\"></form>")
             elif name in user_info.find_one({'user_name': session['user_data']['login']})['friends']:
-                option = Markup("<form action=\"/unFriend\" method=\"post\"><br><button type=\"submit\" name=\"unFriend\" value= \""+ name +"\">Delete Friend</button></form>")
+                option = Markup("<form action=\"/unFriend\" method=\"get\"><br><button type=\"submit\" name=\"unFriend\" value= \""+ name +"\">Delete Friend</button></form>")
             else:
-                option = Markup("<form action=\"/addFriend\" method=\"post\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ name +"\">Add Friend</button></form>")
+                option = Markup("<form action=\"/addFriend\" method=\"get\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ name +"\">Add Friend</button></form>")
         return render_template('profile.html', profile_pic = profile_img, setting = option)
 
 @app.route('/unFriend')
