@@ -67,8 +67,8 @@ def profile(name = None):
         profile_img = ''
         option = ''
         if not data == None and not data['profile_picture'] == '0':
-            profile_img = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
-        else:
+            profile_img = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\
+        else:" class=\"proPicture\">")
             profile_img = Markup("<p>No profile picture</p>")        
         if 'user_data' in session and not data == None:
             if session['user_data']['login'] == name:
@@ -179,7 +179,7 @@ def update_profile_pic():
         temp_file_id = '0'
     
     user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'profile_picture': str(temp_file_id)}})
-    return redirect(url_for('profile'))
+    return redirect('/profile/'+session['user_data']['login'])
 
 
 @app.route('/logout')
