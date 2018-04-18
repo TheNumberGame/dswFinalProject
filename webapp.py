@@ -100,7 +100,7 @@ def friends():
         data = user_info.find_one({'user_name': session['user_data']['login']})
         option = Markup("<ul>")
         for i in data['friends']:
-            option += Markup("<li>"+ i +"</li>")
+            option += Markup("<li><a href=\"/profile/"+ i +"\">"+ i +"</a></li>")
         option += Markup("</ul>")
         return render_template('friends.html', friend = option)
        
