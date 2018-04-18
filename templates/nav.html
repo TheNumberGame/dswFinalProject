@@ -15,9 +15,7 @@
 	{% if logged_in %}
 	{% set temp = "/profile/"+ session['user_data']['login'] %}
 	<li><a href= "{{ temp }}">Profile</a></li>
-	{% endif %}
 	<li><a href="/friends">Friends</a></li>
-	{% if logged_in %}
         <li><p class="navbar-text">Github userid: {{ session['user_data']['login']}}</li>
 	{% endif %}
         <li>
