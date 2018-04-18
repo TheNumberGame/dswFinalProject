@@ -79,7 +79,7 @@ def profile(name = None):
                 option = Markup("<form action=\"/addFriend\" method=\"post\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ name +"\">Add Friend</button></form>")
         return render_template('profile.html', profile_pic = profile_img, setting = option)
 
-@app.route('/unFriend' methods=['POST'])
+@app.route('/unFriend', methods=['POST'])
 def unfriend():
     user_name = request.form['unFriend']
     user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['friends']
@@ -87,7 +87,7 @@ def unfriend():
     user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'friends': user_client_friends}})
     return redirect('/profile/'+user_name)
 
-@app.route('/addFriend' methods=['POST'])
+@app.route('/addFriend', methods=['POST'])
 def addFriend():
     user_name = request.form['AddFriend']
     user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['friends']
