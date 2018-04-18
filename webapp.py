@@ -66,11 +66,11 @@ def profile(name = None):
         print(data, name)
         profile_img = ''
         option = ''
-        if not data['profile_picture'] == None and not data['profile_picture'] == '0':
+        if not data == None and not data['profile_picture'] == '0':
             profile_img = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
         else:
-            profile_img = Markup("<p>user does not exist</p>")        
-        if 'user_data' in session:
+            profile_img = Markup("<p>No profile picture</p>")        
+        if 'user_data' in session and not data == None:
             if session['user_data']['login'] == name:
                 option = Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"submit\"></form>")
             elif name in user_info.find_one({'user_name': session['user_data']['login']})['friends']:
