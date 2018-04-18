@@ -89,7 +89,7 @@ def unfriend():
 
 @app.route('/addFriend')
 def addFriend():
-    user_name = request.form['unFriend']
+    user_name = request.form['AddFriend']
     user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['friends']
     user_client_friends.append(user_name)
     user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'friends': user_client_friends}})
