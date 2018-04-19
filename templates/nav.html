@@ -16,6 +16,7 @@
 	{% set temp = "/profile/"+ session['user_data']['login'] %}
 	<li><a href= "{{ temp }}">Profile</a></li>
 	<li><a href="/friends">Following</a></li>
+	<li><a href ="/follower">Followers</a></li>
         <li><p class="navbar-text">Github userid: {{ session['user_data']['login']}}</li>
 	{% endif %}
         <li>
