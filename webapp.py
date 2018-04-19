@@ -107,10 +107,18 @@ def friends():
         option = Markup("<ul>")
         for i in data['following']:
             option += Markup("<li><a href=\"/profile/"+ i +"\">"+ i +"</a></li>")
-            #option += Markup("<li>"+ i +"</li>")
         option += Markup("</ul>")
         return render_template('friends.html', Following = option)
-       
+
+@app.route('/follower')
+def follower():
+     data = user_info.find_one({'user_name': session['user_data']['login']})
+     option = Markup("<ul>")
+     for i in data['followers']:
+         option += Markup("<li><a href=\"/profile/"+ i +"\">"+ i +"</a></li>")
+     option += Markup("</ul>")
+     return render_template('follower.html', follow = option)
+
 @app.route('/posted', methods=['POST'])
 def post():
     if 'file' in request.files and check_extension(request.files['file'].filename):
