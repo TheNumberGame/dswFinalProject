@@ -75,9 +75,10 @@ def profile(name = None):
             profile_bio = Markup("<p>"+ data['profile_description'] +"</p>")
         else:
             profile_bio = Markup("<p>No Profile Bio</p>")
-        
+           
         if 'user_data' in session and not data == None:
             if session['user_data']['login'] == name:
+                profile_bio += Markup("<br><form action=\"/bio\" method=\"post\"><textarea name=\"Bio\" style=\"width:100%; height:100px;\"></textarea><input type=\"submit\" value=\"submit\"></form>")
                 option = Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"submit\"></form>")
             elif name in user_info.find_one({'user_name': session['user_data']['login']})['following']:
                 option = Markup("<form action=\"/unFriend\" method=\"post\"><br><button type=\"submit\" name=\"unFriend\" value= \""+ name +"\">Delete Friend</button></form>")
