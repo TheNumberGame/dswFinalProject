@@ -5,7 +5,7 @@
 {{ profile_pic }}
 {% if 'github_token' in session %}
 {{ setting }}
-<form action="/bio" enctype="multipart/form-data" method="post">
+<form action="/bio" method="post">
   <textarea name="Bio" style="width:100%; height:100px;"></textarea>
   <input type="submit" value="submit">
 </form>
