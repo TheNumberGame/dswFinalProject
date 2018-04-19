@@ -70,10 +70,12 @@ def profile(name = None):
             profile_img = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
         else:
             profile_img = Markup("<p>No profile picture</p>")      
+        
         if not data == None and not data['profile_description'] == '0':
             profile_bio = Markup("<p>"+ data['profile_description'] +"</p>")
         else:
             profile_bio = Markup("<p>No Profile Bio</p>")
+        
         if 'user_data' in session and not data == None:
             if session['user_data']['login'] == name:
                 option = Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"submit\"></form>")
@@ -87,7 +89,7 @@ def profile(name = None):
 def profile_description():
     mes = request.form['Bio']
     if not mes == "" and not mes.isspace():
-        user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'user_description': mes}})
+        user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'profile_description': mes}})
     return redirect('/profile/'+session['user_data']['login'])
 
 @app.route('/unFriend', methods=['POST'])
