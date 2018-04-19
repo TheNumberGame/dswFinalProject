@@ -73,7 +73,7 @@ def profile(name = None):
         if 'user_data' in session and not data == None:
             if session['user_data']['login'] == name:
                 option = Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"submit\"></form>")
-            elif name in user_info.find_one({'user_name': session['user_data']['login']})['friends']:
+            elif name in user_info.find_one({'user_name': session['user_data']['login']})['following']:
                 option = Markup("<form action=\"/unFriend\" method=\"post\"><br><button type=\"submit\" name=\"unFriend\" value= \""+ name +"\">Delete Friend</button></form>")
             else:
                 option = Markup("<form action=\"/addFriend\" method=\"post\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ name +"\">Add Friend</button></form>")
@@ -82,28 +82,34 @@ def profile(name = None):
 @app.route('/unFriend', methods=['POST'])
 def unfriend():
     user_name = request.form['unFriend']
-    user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['friends']
+    user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['following']
     user_client_friends.remove(user_name)
-    user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'friends': user_client_friends}})
+    user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'following': user_client_friends}})
+    user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['followers']
+    user_client_friends.remove(session['user_data']['login'])
+    user_info.find_one_and_update({'user_name': user_name}, {'$set': {'followers': user_client_friends}})
     return redirect('/profile/'+user_name)
 
 @app.route('/addFriend', methods=['POST'])
 def addFriend():
     user_name = request.form['AddFriend']
-    user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['friends']
+    user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['following']
     user_client_friends.append(user_name)
-    user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'friends': user_client_friends}})
+    user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'following': user_client_friends}})
+    user_client_friends = user_info.find_one({'user_name': user_name})['followers']
+    user_client_friends.append(session['user_data']['login'])
+    user_info.find_one_and_update({'user_name': user_name}, {'$set': {'following': user_client_friends}})
     return redirect('/profile/'+user_name)
 
 @app.route('/friends')
 def friends():
         data = user_info.find_one({'user_name': session['user_data']['login']})
         option = Markup("<ul>")
-        for i in data['friends']:
+        for i in data['following']:
             option += Markup("<li><a href=\"/profile/"+ i +"\">"+ i +"</a></li>")
             #option += Markup("<li>"+ i +"</li>")
         option += Markup("</ul>")
-        return render_template('friends.html', friend = option)
+        return render_template('friends.html', following = option)
        
 @app.route('/posted', methods=['POST'])
 def post():
@@ -199,7 +205,7 @@ def authorized():
             session['github_token'] = (resp['access_token'], '')
             session['user_data']=github.get('user').data
             if user_info.find_one({'user_name': session['user_data']['login']}) == None:
-                user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0','profile_description': '0', 'friends': []})
+                user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0','profile_description': '0', 'following': [], 'followers': []})
             message='You were successfully logged in as ' + session['user_data']['login']
         except Exception as inst:
             session.clear()
