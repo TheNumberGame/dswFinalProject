@@ -66,10 +66,15 @@ def profile(name = None):
         print(data, name)
         profile_img = ''
         option = ''
+        profile_bio = ''
         if not data == None and not data['profile_picture'] == '0':
             profile_img = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
         else:
-            profile_img = Markup("<p>No profile picture</p>")        
+            profile_img = Markup("<p>No profile picture</p>")      
+        if not data == None and not data['profile_description'] == '0':
+            profile_bio = Markup("<p>"+ data['profile_description'] +"</p>")
+        else:
+            profile_bio = Markup("<p>No Profile Bio</p>")
         if 'user_data' in session and not data == None:
             if session['user_data']['login'] == name:
                 option = Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"submit\"></form>")
@@ -78,6 +83,12 @@ def profile(name = None):
             else:
                 option = Markup("<form action=\"/addFriend\" method=\"post\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ name +"\">Add Friend</button></form>")
         return render_template('profile.html', profile_pic = profile_img, setting = option)
+
+@app.route('/bio', methods=['POST'])
+def profile_description():
+    mes = request.form['message']
+    if not mes == "" and not mes.isspace():
+        user.find_one_and_update({'user_name': session['uer_data']['login']}, {'$set',{'user_description': mes}})
 
 @app.route('/unFriend', methods=['POST'])
 def unfriend():
