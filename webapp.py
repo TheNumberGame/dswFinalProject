@@ -63,7 +63,6 @@ def home():
 @app.route('/profile/<name>')
 def profile(name = None):
         data = user_info.find_one({'user_name': str(name)})
-        print(data, name)
         profile_img = ''
         option = ''
         profile_bio = ''
@@ -88,7 +87,7 @@ def profile(name = None):
 def profile_description():
     mes = request.form['Bio']
     if not mes == "" and not mes.isspace():
-        user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set',{'user_description': mes}})
+        user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'user_description': mes}})
     return redirect('/profile/'+session['user_data']['login'])
 
 @app.route('/unFriend', methods=['POST'])
