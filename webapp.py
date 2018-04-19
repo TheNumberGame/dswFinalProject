@@ -27,7 +27,7 @@ url = 'mongodb://{}:{}@{}:{}/{}'.format(
         os.environ["MONGO_DBNAME"])
 clt = pymongo.MongoClient(url)
 usr = clt[os.environ["MONGO_DBNAME"]]
-collection = usr['chat'] #This is contains all posts made
+collection = usr['chat'] #This is contains all posts made to main feed
 user_info = usr['user_data'] #contains user data
 fs = gridfs.GridFS(usr, 'pictures') #This contains the pictures
 
