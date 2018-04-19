@@ -28,7 +28,7 @@ h1{
 
 .proPicture
 {
-	border: 1px solid #ddd;
+	border: 1px solid black;
 	display: block;
 	border-radius: 50%;
 	max-height: 100px;
