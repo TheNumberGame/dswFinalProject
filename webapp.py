@@ -1,8 +1,6 @@
 from flask import Flask, redirect, url_for, session, request, jsonify, Markup, escape
 from flask_oauthlib.client import OAuth
 from flask import render_template
-from flask_socketio import SocketIO, emit
-from threading import Lock
 
 import pprint
 import os
@@ -14,8 +12,6 @@ from bson.objectid import ObjectId
 
 
 app = Flask(__name__)
-
-#socketio = SocketIO(app, async_mode=None)
 
 
 app.debug = True
