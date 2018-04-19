@@ -86,7 +86,7 @@ def profile(name = None):
 
 @app.route('/bio', methods=['POST'])
 def profile_description():
-    mes = request.form['message']
+    mes = request.form['Bio']
     if not mes == "" and not mes.isspace():
         user.find_one_and_update({'user_name': session['uer_data']['login']}, {'$set',{'user_description': mes}})
     return redirect('/profile/'+session['user_data']['login'])
