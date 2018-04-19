@@ -81,7 +81,7 @@ def profile(name = None):
                 option = Markup("<form action=\"/unFriend\" method=\"post\"><br><button type=\"submit\" name=\"unFriend\" value= \""+ name +"\">Delete Friend</button></form>")
             else:
                 option = Markup("<form action=\"/addFriend\" method=\"post\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ name +"\">Add Friend</button></form>")
-        return render_template('profile.html', profile_pic = profile_img, setting = option)
+        return render_template('profile.html', profile_pic = profile_img, setting = option, description = profile_bio)
 
 @app.route('/bio', methods=['POST'])
 def profile_description():
