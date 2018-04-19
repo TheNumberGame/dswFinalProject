@@ -6,7 +6,10 @@
 {% if 'github_token' in session %}
 {{ setting }}
 <br>
-<p>Bio</p>
+<h1>Bio</h1>
+<br>
+{{ description }}
+<br>
 <form action="/bio" method="post">
   <textarea name="Bio" style="width:100%; height:100px;"></textarea>
   <input type="submit" value="submit">
