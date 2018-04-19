@@ -99,7 +99,7 @@ def unfriend():
     user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['following']
     user_client_friends.remove(user_name)
     user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'following': user_client_friends}})
-    user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['followers']
+    user_client_friends = user_info.find_one({'user_name': user_name})['followers']
     user_client_friends.remove(session['user_data']['login'])
     user_info.find_one_and_update({'user_name': user_name}, {'$set': {'followers': user_client_friends}})
     return redirect('/profile/'+user_name)
