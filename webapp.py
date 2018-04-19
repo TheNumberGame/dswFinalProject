@@ -88,7 +88,7 @@ def profile(name = None):
 def profile_description():
     mes = request.form['Bio']
     if not mes == "" and not mes.isspace():
-        user.find_one_and_update({'user_name': session['uer_data']['login']}, {'$set',{'user_description': mes}})
+        user_info.find_one_and_update({'user_name': session['uer_data']['login']}, {'$set',{'user_description': mes}})
     return redirect('/profile/'+session['user_data']['login'])
 
 @app.route('/unFriend', methods=['POST'])
