@@ -109,7 +109,7 @@ def friends():
             option += Markup("<li><a href=\"/profile/"+ i +"\">"+ i +"</a></li>")
             #option += Markup("<li>"+ i +"</li>")
         option += Markup("</ul>")
-        return render_template('friends.html', following = option)
+        return render_template('friends.html', Following = option)
        
 @app.route('/posted', methods=['POST'])
 def post():
