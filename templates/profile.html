@@ -3,6 +3,7 @@
 {% block content %}
 <h1>Profile</h1>
 {{ profile_pic }}
+<textarea name="Bio" style="width:100%; height:100px;"></textarea>
 {% if 'github_token' in session %}
 {{ setting }}
 {% else %}
