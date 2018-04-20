@@ -35,3 +35,15 @@ h1{
 	max-width: 100px;
 	
 }
+
+@media screen and (max-width: 500px)
+{
+	.imgPost
+	{
+     		border: 1px solid #000000;
+     		display: block;
+     		border-radius: 8px;
+     		max-height: 100px;
+     		max-width: 160px;
+	}
+}
