@@ -10,14 +10,17 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">Home</a>
+      {% if logged_in %}
+      {% set temp = "/profile/"+ session['user_data']['login'] %}
+      <li><a href= "{{ temp }}">Profile</a></li>
+      <li><a href="/friends">Following</a></li>
+      <li><a href ="/follower">Followers</a></li>
+      {% endif %}
     </div>
       
       <ul class="nav navbar-nav navbar-right">
 	{% if logged_in %}
-	{% set temp = "/profile/"+ session['user_data']['login'] %}
-	<li><a href= "{{ temp }}">Profile</a></li>
-	<li><a href="/friends">Following</a></li>
-	<li><a href ="/follower">Followers</a></li>
+	
         <li><p class="navbar-text">Github userid: {{ session['user_data']['login']}}</li>
 	{% endif %}
         <li>
