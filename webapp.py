@@ -114,11 +114,15 @@ def addFriend():
 @app.route('/friends')
 def friends():
         data = user_info.find_one({'user_name': session['user_data']['login']})
+        feed = ""
         option = Markup("<ul>")
         for i in data['following']:
             option += Markup("<li><a href=\"/profile/"+ i +"\">"+ i +"</a></li>")
         option += Markup("</ul>")
-        return render_template('friends.html', Following = option)
+        for i in collection.find():
+            if i['name'] in data['following']:
+                feed += single_post_to_html(i)
+        return render_template('friends.html', Following = option, posts = feed)
 
 @app.route('/follower')
 def follower():
