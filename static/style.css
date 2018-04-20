@@ -36,7 +36,7 @@ h1{
 	
 }
 
-@media screen and (min-width: 500px)
+@media screen and (max-width: 400px)
 {
 	.imgPost
 	{
