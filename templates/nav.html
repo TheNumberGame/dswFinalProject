@@ -11,7 +11,7 @@
       </button>
       <a class="navbar-brand" href="/">Home</a>
       <div id="items">	  
-      <ul class="nav navbar-nav navbar-left">
+      <ul>
       {% if logged_in %}
       	{% set temp = "/profile/"+ session['user_data']['login'] %}
       	<li><a href= "{{ temp }}">Profile</a></li>
