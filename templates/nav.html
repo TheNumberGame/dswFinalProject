@@ -1,6 +1,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
+    <div>	  
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -9,16 +10,15 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">Home</a>
-
       <ul class="nav navbar-nav navbar-left">
       {% if logged_in %}
-      {% set temp = "/profile/"+ session['user_data']['login'] %}
-      <li><a href= "{{ temp }}">Profile</a></li>
-      <li><a href="/friends">Following</a></li>
-      <li><a href ="/follower">Followers</a></li>
+      	{% set temp = "/profile/"+ session['user_data']['login'] %}
+      	<li><a href= "{{ temp }}">Profile</a></li>
+      	<li><a href="/friends">Following</a></li>
+      	<li><a href ="/follower">Followers</a></li>
       {% endif %}
       </ul>
-
+      </div>
       
       <ul class="nav navbar-nav navbar-right">
 	{% if logged_in %}
