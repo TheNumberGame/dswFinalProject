@@ -8,7 +8,7 @@
       </button>
       <a class="navbar-brand" href="/">Home</a>
     </div>
-    <div class="navbar-collapse" id="items">
+    <div class="collapse navbar-collapse" id="items">
     <ul class="nav navbar-nav">
       {% if logged_in %}
       	{% set temp = "/profile/"+ session['user_data']['login'] %}
