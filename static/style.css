@@ -14,8 +14,8 @@
      border: 1px solid #000000;
      display: block;
      border-radius: 8px;
-     width: 30%;
-     height: 30%;
+     width: auto;
+     height: auto;
      max-height: 300px;
      max-width: 500px;
 }
