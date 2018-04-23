@@ -15,6 +15,7 @@
      display: block;
      border-radius: 8px;
      width: 20%;
+     height: 20%
      max-height: 300px;
      max-width: 500px;
 }
