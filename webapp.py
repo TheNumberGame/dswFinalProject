@@ -173,9 +173,9 @@ def single_post_to_html(data = None):
           if data['name'] == session['user_data']['login']:
                option += Markup("<br><button type=\"submit\" name=\"DeletePost\" value= \""+ str(data["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ str(data["date"]) +"</p>")
           else:
-               option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ data["date"] +"</p>")
+               option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
      else:
-          option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ data["date"] +"</p>")
+          option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
      return option
         
 def posts_to_html(data = None):
@@ -187,8 +187,13 @@ def posts_to_html(data = None):
           option += str(e)
      return option
 
-#def date_of_post(date = None):
-     
+def date_of_post(date = None):
+     temp_date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
+     if not temp_date.hour == datetime.hour and not temp_date.day == datetime.day and not temp_date.month == datetime.month and not temp_date.year == datetime.year:
+          return str(datetime.hour-temp_date.hour)+'hours ago.'
+     else:
+          temp_date = temp_date.astimezone(PST)
+          return str(temp_date.year)+'-'+str(temp_date.month)+'-'+str(temp_date.day)
 
 @app.route('/b', methods=['POST'])
 def delPost():
