@@ -148,9 +148,9 @@ def post():
         
     if not request.form['message'] == "" and not request.form['message'].isspace() or not temp_file_id == None:
         if not temp_file_id == None:
-             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": datetime.now()}
+             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
         else:
-            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(request.form['message']), "date": datetime.now()}         
+            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}         
     else:
         return render_template('home.html', message=posts_to_html("Invalid"))
         
