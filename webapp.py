@@ -75,7 +75,7 @@ def profile(name = None):
            
         if 'user_data' in session and not data == None:
             for i in collection.find().sort('date', -1):
-                if i['name'] == session['user_data']['login']:
+                if i['name'] == name:
                     feed += single_post_to_html(i)
             if session['user_data']['login'] == name:
                 profile_bio += Markup("<br><form action=\"/bio\" method=\"post\"><textarea name=\"Bio\" style=\"width:100%; height:100px;\"></textarea><input type=\"submit\" value=\"submit\"></form>")
