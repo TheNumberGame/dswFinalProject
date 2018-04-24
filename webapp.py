@@ -7,7 +7,7 @@ import os
 import json
 import pymongo
 import gridfs
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from bson.objectid import ObjectId
 
 
@@ -43,6 +43,7 @@ github = oauth.remote_app(
 )
 
 VALID_EXTENSIONS = ['jpeg', 'png', 'jpg', 'PNG']
+PST = timezone(timedelta(hours=-7), name='PST')
 
 @app.context_processor
 def inject_logged_in():
@@ -147,9 +148,9 @@ def post():
         
     if not request.form['message'] == "" and not request.form['message'].isspace() or not temp_file_id == None:
         if not temp_file_id == None:
-             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}
+             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(request.form['message']), "date": datetime.now()}
         else:
-            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(request.form['message']), "date": str(datetime.now())}         
+            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(request.form['message']), "date": datetime.now()}         
     else:
         return render_template('home.html', message=posts_to_html("Invalid"))
         
