@@ -187,6 +187,9 @@ def posts_to_html(data = None):
           option += str(e)
      return option
 
+#def date_of_post(date = None):
+     
+
 @app.route('/b', methods=['POST'])
 def delPost():
     doc_id = request.form['DeletePost']
