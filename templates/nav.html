@@ -18,12 +18,12 @@
       	<li><a href ="/follower">Followers</a></li>
       {% endif %}
     </ul>
+    <div>
     <form class="form-inline" action="/action_page.php">
-       <div class="form-group">
        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-       </div>
        <button class="btn btn-success" type="submit">Search</button>
     </form>
+    </div>
     <ul class="nav navbar-nav navbar-right">
 	{% if logged_in %}
         <li><p class="navbar-text">Github userid: {{ session['user_data']['login']}}</li>
