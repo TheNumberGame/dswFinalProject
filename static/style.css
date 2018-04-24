@@ -33,8 +33,10 @@ h1{
 	border: 1px solid #000000;
 	display: block;
 	border-radius: 50%;
-	max-height: 100px;
-	max-width: 100px;
+	width: auto;
+     	height: auto;
+     	max-height: 20%;
+     	max-width: 20%;
 	
 }
 
