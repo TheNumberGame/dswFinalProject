@@ -119,7 +119,7 @@ def friends():
         for i in data['following']:
             option += Markup("<li><a href=\"/profile/"+ i +"\">"+ i +"</a></li>")
         option += Markup("</ul>")
-        for i in collection.sort('date', -1):
+        for i in collection.find().sort('date', -1):
             if i['name'] in data['following']:
                 feed += single_post_to_html(i)
         return render_template('friends.html', Following = option, posts = feed)
