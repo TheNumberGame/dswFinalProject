@@ -200,6 +200,10 @@ def date_of_post(date = None):
           temp_date = temp_date.astimezone(PST)
           return str(temp_date.year)+'-'+str(temp_date.month)+'-'+str(temp_date.day)
 
+@app.route('/searchPerson' methods=['GET'])        
+def search_person():
+     request.args['search']
+
 @app.route('/b', methods=['POST'])
 def delPost():
     doc_id = request.form['DeletePost']
