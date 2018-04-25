@@ -204,6 +204,7 @@ def date_of_post(date = None):
 def search_person():
      request.args['search']
      prsn = user_info.find_one({'name': request.args['search']})
+     print(prsn)
      if prsn == None:
           return redirect('/')
      return redirct('/profile/'+prsn['user_name'])
