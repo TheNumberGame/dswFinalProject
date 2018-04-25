@@ -194,7 +194,7 @@ def date_of_post(date = None):
           if today_date.hour-temp_date.hour == 0:
                if today_date.minute-temp_date.minute == 0:
                     return 'Just Now.'
-               return str(today_date.minute-temp_date.minute)
+               return str(today_date.minute-temp_date.minute) +' minutes ago.'
           return str(today_date.hour-temp_date.hour)+' hours ago.'
      else:
           temp_date = temp_date.astimezone(PST)
