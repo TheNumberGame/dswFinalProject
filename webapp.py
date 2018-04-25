@@ -191,7 +191,11 @@ def date_of_post(date = None):
      temp_date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
      today_date = datetime.now()
      if temp_date.day == today_date.day and temp_date.month == today_date.month and temp_date.year == today_date.year:
-          return str(datetime.now().hour-temp_date.hour)+' hours ago.'
+          if today_date.hour-temp_date.hour == 0:
+               if today_date.minute-temp_date.minute == 0:
+                    return 'Just Now.'
+               return str(today_date.minute-temp_date.minute)
+          return str(today_date.hour-temp_date.hour)+' hours ago.'
      else:
           temp_date = temp_date.astimezone(PST)
           return str(temp_date.year)+'-'+str(temp_date.month)+'-'+str(temp_date.day)
