@@ -188,7 +188,7 @@ def posts_to_html(data = None):
      return option
 
 def date_of_post(date = None):
-     temp_date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
+     temp_date = datetime.strptime(str(date), '%Y-%m-%d %H:%M:%S.%f')
      if not temp_date.hour == datetime.hour and not temp_date.day == datetime.day and not temp_date.month == datetime.month and not temp_date.year == datetime.year:
           return str(datetime.hour-temp_date.hour)+'hours ago.'
      else:
