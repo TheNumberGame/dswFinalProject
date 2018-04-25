@@ -205,7 +205,7 @@ def search_person():
      name = request.args['search']
      if user_info.find_one({'user_name': name}) == None:
           return redirect('/')
-     return redirct('/profile/'+name)
+     return redirect('/profile/'+name)
 
 @app.route('/b', methods=['POST'])
 def delPost():
