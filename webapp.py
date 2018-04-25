@@ -189,7 +189,8 @@ def posts_to_html(data = None):
 
 def date_of_post(date = None):
      temp_date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
-     if temp_date.day == datetime.day and temp_date.month == datetime.month and temp_date.year == datetime.year:
+     today_date = datetime.now()
+     if temp_date.day == today_date.day and temp_date.month == today_date.month and temp_date.year == today_date.year:
           return str(datetime.now().hour-temp_date.hour)+'hours ago.'
      else:
           temp_date = temp_date.astimezone(PST)
