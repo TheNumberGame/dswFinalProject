@@ -202,12 +202,10 @@ def date_of_post(date = None):
 
 @app.route('/searchPerson')        
 def search_person():
-     request.args['search']
-     prsn = user_info.find_one({'name': request.args['search']})
-     print(prsn)
-     if prsn == None:
+     name = request.args['search']
+     if user_info.find_one({'user_name': name}) == None:
           return redirect('/')
-     return redirct('/profile/'+prsn['user_name'])
+     return redirct('/profile/'+name)
 
 @app.route('/b', methods=['POST'])
 def delPost():
