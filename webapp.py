@@ -154,10 +154,10 @@ def post():
         else:
             data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now())}         
     else:
-        if message == "" and message.isspace() or temp_file_id == None:
-            return render_template('home.html', message=posts_to_html("There is no text or picture."))
-        elif len(message) < 251:
+        if len(message) > 251:
             return render_template('home.html', message=posts_to_html("Must be less than 251 characters."))
+        elif message == "" and message.isspace() or temp_file_id == None:
+            return render_template('home.html', message=posts_to_html("There is no text or picture."))
         else:
             return render_template('home.html', message=posts_to_html("Unknown Error."))
         
