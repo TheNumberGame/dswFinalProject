@@ -56,6 +56,8 @@ h1{
 
 button
 {
+	border: none;
+	color: white;
 	background-color: #008CBA;
 	border-radius: 4px;
 }
