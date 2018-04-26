@@ -9,7 +9,9 @@
 <h1>Bio</h1>
 <br>
 {{ description }}
+<form action="/b" method="post">
 {{ posts }}
+</form>
 {% else %}
 <p>Must be logged in.</p>
 {% endif %}
