@@ -53,3 +53,8 @@ h1{
      		max-width: 220px;
 	}
 }
+
+.button
+{
+	{border-radius: 12px;}
+}
