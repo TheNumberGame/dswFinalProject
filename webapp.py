@@ -148,13 +148,18 @@ def post():
      
     message = request.form['message']
     
-    if not message == "" and not message.isspace() and len(message) < 250 or not temp_file_id == None:
+    if not message == "" and not message.isspace() and len(message) < 251 or not temp_file_id == None:
         if not temp_file_id == None:
              data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now())}
         else:
             data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now())}         
     else:
-        return render_template('home.html', message=posts_to_html("Invalid"))
+        if message == "" and message.isspace() or temp_file_id == None:
+            return render_template('home.html', message=posts_to_html("There is no text or picture."))
+        elif len(message) < 251:
+            return render_template('home.html', message=posts_to_html("Must be less than 251 characters."))
+        else:
+            return render_template('home.html', message=posts_to_html("Unknown Error."))
         
     collection.insert(data)
     
@@ -185,8 +190,8 @@ def posts_to_html(data = None):
      try:
           for i in data.sort('date', -1):
                option += single_post_to_html(i)
-     except Exception as e:
-          option += str(e)
+     except:
+          option += data
      return option
 
 def date_of_post(date = None):
