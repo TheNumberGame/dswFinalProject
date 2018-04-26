@@ -148,7 +148,7 @@ def post():
      
     message = request.form['message']
     
-    if not message == "" and not message.isspace() or not temp_file_id == None:
+    if not message == "" and not message.isspace() and len(message) < 250 or not temp_file_id == None:
         if not temp_file_id == None:
              data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now())}
         else:
