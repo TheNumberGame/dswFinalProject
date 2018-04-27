@@ -181,7 +181,7 @@ def single_post_to_html(data = None):
           if data['name'] == session['user_data']['login']:
                option += Markup("<br><button type=\"submit\" name=\"DeletePost\" value= \""+ str(data["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
           else:
-               option += Markup("<br><button type=\"submit\" name=\"ReplyPost\" value= \""+ str(data["_id"]) +"\">Reply</button><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
+               option += Markup("<br><button class=\"toTextBox\" type=\"submit\" name=\"ReplyPost\" value= \""+ str(data["_id"]) +"\">Reply</button><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
      else:
           option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
      return option
