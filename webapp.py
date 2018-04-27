@@ -28,6 +28,7 @@ url = 'mongodb://{}:{}@{}:{}/{}'.format(
 clt = pymongo.MongoClient(url)
 usr = clt[os.environ["MONGO_DBNAME"]]
 collection = usr['chat'] #This is contains all posts made to main feed
+reply = usr['reply'] #contains the replys to chat
 user_info = usr['user_data'] #contains user data
 fs = gridfs.GridFS(usr, 'pictures') #This contains the pictures
 
@@ -150,7 +151,7 @@ def post():
     
     if not message == "" and not message.isspace() and len(message) < 251 or not temp_file_id == None:
         if not temp_file_id == None:
-             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now())}
+             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now()), "replys": []}
         else:
             data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now())}         
     else:
@@ -180,7 +181,7 @@ def single_post_to_html(data = None):
           if data['name'] == session['user_data']['login']:
                option += Markup("<br><button type=\"submit\" name=\"DeletePost\" value= \""+ str(data["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
           else:
-               option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
+               option += Markup("<br><button type=\"submit\" name=\"ReplyPost\" value= \""+ str(data["_id"]) +"\">Delete Post</button><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
      else:
           option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
      return option
@@ -206,6 +207,36 @@ def date_of_post(date = None):
      else:
           temp_date = temp_date.astimezone(PST)
           return str(temp_date.year)+'-'+str(temp_date.month)+'-'+str(temp_date.day)
+
+@app.route('/reply' methods=['POST'])
+def reply_to_post():
+     if 'file' in request.files and check_extension(request.files['file'].filename):
+        fl = request.files['file']
+        temp_file_id = fs.put(fl, filename=fl.filename)
+    else:
+        temp_file_id = None
+    
+    main_post = request.form['MainPost']
+    message = request.form['ReplyPost']
+    
+    if not message == "" and not message.isspace() and len(message) < 251 or not temp_file_id == None:
+        if not temp_file_id == None:
+             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now()), "replys": []}
+        else:
+            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now())}         
+    else:
+        if len(message) > 251:
+            return render_template('home.html', message=posts_to_html("Must be less than 251 characters."))
+        elif message == "" and message.isspace() or temp_file_id == None:
+            return render_template('home.html', message=posts_to_html("There is no text or picture."))
+        else:
+            return render_template('home.html', message=posts_to_html("Unknown Error."))
+    
+    temp_reply = collection.find_one({"_id": ObjectId(main_post)})['replys']
+    temp_reply.append(data['_id'])
+    collection.find_one_and_update({"_id": ObjectId(main_post), {$set: {"replys": temp_reply}}})    
+    reply.insert(data)
+    return redirect(url_for("home"))
 
 @app.route('/searchPerson')        
 def search_person():
