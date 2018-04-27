@@ -10,7 +10,7 @@
     <title>{% block title %}{% endblock %}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
-    <script scr="static/socialHour.js"></script>
+    <script src="{{ url_for('static', 'socialHour.js') }}"></script>
     {% block updatePost %}{% endblock %}
   </head>
   <body>
