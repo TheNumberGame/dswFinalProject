@@ -234,7 +234,7 @@ def reply_to_post():
     
     temp_reply = collection.find_one({"_id": ObjectId(main_post)})['replys']
     temp_reply.append(data['_id'])
-    collection.find_one_and_update({"_id": ObjectId(main_post), {$set: {"replys": temp_reply}}})    
+    collection.find_one_and_update({"_id": ObjectId(main_post), {'$set': {"replys": temp_reply}}})    
     reply.insert(data)
     return redirect(url_for("home"))
 
