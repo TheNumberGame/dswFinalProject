@@ -210,7 +210,7 @@ def date_of_post(date = None):
 
 @app.route('/reply', methods=['POST'])
 def reply_to_post():
-     if 'file' in request.files and check_extension(request.files['file'].filename):
+    if 'file' in request.files and check_extension(request.files['file'].filename):
         fl = request.files['file']
         temp_file_id = fs.put(fl, filename=fl.filename)
     else:
