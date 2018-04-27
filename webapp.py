@@ -208,7 +208,7 @@ def date_of_post(date = None):
           temp_date = temp_date.astimezone(PST)
           return str(temp_date.year)+'-'+str(temp_date.month)+'-'+str(temp_date.day)
 
-@app.route('/reply' methods=['POST'])
+@app.route('/reply', methods=['POST'])
 def reply_to_post():
      if 'file' in request.files and check_extension(request.files['file'].filename):
         fl = request.files['file']
