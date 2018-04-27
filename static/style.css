@@ -45,8 +45,8 @@ h1{
 
 .container
 {
-	height:300;
-	width: 300;
+	height:100;
+	width: 100;
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 768px)
 {
