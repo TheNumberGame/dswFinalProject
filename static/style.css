@@ -26,6 +26,8 @@
 body{
 	/*background-color: rgb(153, 204, 255);*/
 	background-image: url("download.jpg");
+	background-repeat: no-repeat;
+	background-size: auto;
 	width: auto;
 	height: auto;
 	max-height: 100%;
