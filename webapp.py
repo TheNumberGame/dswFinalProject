@@ -217,7 +217,7 @@ def reply_to_post():
         temp_file_id = None
     
     main_post = request.form['MainPost']
-    message = request.form['ReplyPost']
+    message = request.form['message']
     
     if not message == "" and not message.isspace() and len(message) < 251 or not temp_file_id == None:
         if not temp_file_id == None:
