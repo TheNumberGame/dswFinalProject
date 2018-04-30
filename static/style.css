@@ -24,7 +24,8 @@
 }
 
 body{
-	background-color: rgb(153, 204, 255);
+	/*background-color: rgb(153, 204, 255);*/
+	    background-image: url("yosemite-merced.jpg");
 }
 
 h1{
