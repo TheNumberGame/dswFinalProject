@@ -42,8 +42,8 @@ body{
 
 p {
   color: black;
- /* -webkit-text-fill-color: black; */
-  -webkit-text-stroke-width: 1px;
+ /* -webkit-text-fill-color: black; 
+  -webkit-text-stroke-width: 1px;*/
   -webkit-text-stroke-color: black;
 }
 
