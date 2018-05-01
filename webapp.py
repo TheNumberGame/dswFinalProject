@@ -191,7 +191,11 @@ def posts_to_html(data = None):
      option = ""
      try:
           for i in data.sort('date', -1):
+               option += Markup("<div class=\"mesBubble\">")
                option += single_post_to_html(i)
+               for j in i['replys']:
+                    option += single_post_to_html(i)
+               option += Markup("</div>")
      except:
           option += data
      return option
