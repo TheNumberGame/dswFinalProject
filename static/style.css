@@ -35,8 +35,11 @@ body{
 	max-width: 100%;
 }
 
-h1{
-	color: rgb(0, 0, 0);
+h1 {
+  color: black;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
 .proPicture
