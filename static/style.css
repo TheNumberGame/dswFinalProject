@@ -9,6 +9,11 @@
 {
      word-break: break-all;
      padding: 25px 0px 25px 0px;
+     
+}
+
+.mesBubble
+{
      border-bottom: 4px solid black;
 }
 
