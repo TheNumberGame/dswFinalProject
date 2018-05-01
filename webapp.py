@@ -193,7 +193,7 @@ def posts_to_html(data = None):
           for i in data.sort('date', -1):
                option += Markup("<div class=\"mesBubble\">")
                option += single_post_to_html(i)
-               for j in i['replys']:
+               for j in reversed(i['replys']):
                     option += single_post_to_html(reply.find_one({"_id": ObjectId(j)}))
                option += Markup("</div>")
      except:
