@@ -224,7 +224,7 @@ def reply_to_post():
         if not temp_file_id == None:
              data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now()), "replys": []}
         else:
-            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now())}         
+            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now()), "replys": []}         
     else:
         if len(message) > 251:
             return render_template('home.html', message=posts_to_html("Must be less than 251 characters."))
