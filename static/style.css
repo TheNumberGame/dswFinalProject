@@ -42,10 +42,10 @@ body{
 
 p {
 	font-size: 16px;
-	color: black;
+	/*color: black;
   	-webkit-text-fill-color: black; 
   	-webkit-text-stroke-width: 1px;
-  	-webkit-text-stroke-color: black;
+  	-webkit-text-stroke-color: black; */
 }
 
 .proPicture
