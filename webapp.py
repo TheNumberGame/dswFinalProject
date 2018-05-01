@@ -52,7 +52,7 @@ def inject_logged_in():
 
 @app.route('/login')
 def login():
-    collection.updateMany({}, {"$set": {"replys": []}})
+    collection.updateMany({}, {"$set": {"replys": []}}, {})
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
 
 @app.route('/')
