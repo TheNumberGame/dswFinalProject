@@ -236,7 +236,7 @@ def reply_to_post():
             return render_template('home.html', message=posts_to_html("There is no text or picture."))
         else:
             return render_template('home.html', message=posts_to_html("Unknown Error."))
-    
+    print(main_post)
     temp_reply = collection.find_one({"_id": ObjectId(main_post)})['replys']
     temp_reply.append(data['_id'])
     collection.find_one_and_update({"_id": ObjectId(main_post)}, {'$set': {"replys": temp_reply}})    
