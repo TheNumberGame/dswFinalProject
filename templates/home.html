@@ -2,7 +2,7 @@
 {% block title %}Social Hour{% endblock %}
 
 {% block content %}
-<img src="SocialHourlogo.jpg" alt="logo" height="42" width="42">
+ <img src="{{url_for('static',filename='SocialHourlogo.jpg')}}" alt="dsfdsa" id ="homeimg">
 
 <h1>Social Hour</h1>
 {% if 'github_token' in session %}
