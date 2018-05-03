@@ -2,7 +2,8 @@
 {% block title %}Social Hour{% endblock %}
 
 {% block content %}
-<img>SocialHourlogo.jpg</img>
+<img src="SocialHourlogo.jpg" alt="logo" height="42" width="42">
+
 <h1>Social Hour</h1>
 {% if 'github_token' in session %}
 <form action="/posted" enctype="multipart/form-data" method="post">
