@@ -253,11 +253,14 @@ def search_person():
 @app.route('/b', methods=['POST'])
 def delPost():
     doc_id = request.form['DeletePost']
-    
-    db_doc = collection.find_one_and_delete({'_id': ObjectId(doc_id)})
-    if not db_doc['pic_id'] == '0':
-         fs.delete({'_id': ObjectId(db_doc['pic_id'])})
-   
+    try:
+        db_doc = collection.find_one_and_delete({'_id': ObjectId(doc_id)})
+        if not db_doc['pic_id'] == '0':
+            fs.delete({'_id': ObjectId(db_doc['pic_id'])})
+    except:
+        db_doc = reply.find_one_and_delete({'_id': ObjectId(doc_id)})
+        if not db_doc['pic_id'] == '0':
+            fs.delete({'_id': ObjectId(db_doc['pic_id'])})
     return redirect(url_for("home"))
 
 
