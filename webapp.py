@@ -190,25 +190,12 @@ def single_post_to_html(data):
         
 def posts_to_html(data = None):
      option = ""
-     q_reply = []
      try:
           for i in data.sort('date', -1):
                option += Markup("<div class=\"mesBubble\">")
                option += single_post_to_html(i)
-               q_reply.append(i)
-               for j in q_reply:
-                    print('layer 1')
-                    for a in reversed(j['replys']):
-                         print('layer 2')
-                         temp_reply = reply.find_one({"_id": ObjectId(a)})
-                         if temp_reply == None:
-                              print('layer 4')
-                              j['replys'].remove(a)
-                         else:
-                              print('layer 2.1')
-                              option += single_post_to_html(temp_reply)
-                              #if not a in q_reply:
-                              #     q_reply.append(reply.find_one({"_id": ObjectId(a)}))
+               for j in i['replys']:
+                    option += single_post_to_html(reply.find_one({"_id": ObjectId(j)}))
                option += Markup("</div>")
      except Exception as ex:
           logging.exception('FAILED')
