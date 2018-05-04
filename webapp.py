@@ -197,10 +197,14 @@ def posts_to_html(data = None):
                option += single_post_to_html(i)
                q_reply.append(i)
                for j in q_reply:
-                    for a in reversed(j['replys']):   
-                         option += single_post_to_html(reply.find_one({"_id": ObjectId(a)}))
-                         if not a in q_reply:
-                              q_reply.append(reply.find_one({"_id": ObjectId(a)}))
+                    for a in reversed(j['replys']):
+                         temp_reply = reply.find_one({"_id": ObjectId(a)})
+                         if temp_reply == None:
+                              j['replys'].remove(a)
+                         else:
+                              option += single_post_to_html(temp_reply)
+                              if not a in q_reply:
+                                   q_reply.append(reply.find_one({"_id": ObjectId(a)}))
                option += Markup("</div>")
      except Exception as ex:
           logging.exception('FAILED')
