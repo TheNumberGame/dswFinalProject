@@ -110,4 +110,6 @@ img
 	border: 1px solid #000000;
      	display: block;
      	border-radius: 8px;
+	max-height: 160px;
+     	max-width: 220px;
 }
