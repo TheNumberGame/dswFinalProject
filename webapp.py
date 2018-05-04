@@ -182,7 +182,7 @@ def single_post_to_html(data):
      if 'user_data' in session:
           if data['name'] == session['user_data']['login']:
                option += Markup("<br><button type=\"submit\" name=\"DeletePost\" form=\"deleteForm\" value= \""+ str(data["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
-          else:
+          elif not data['replys'] == True:
                option += Markup("<br><button class=\"toTextBox\" type=\"button\" name=\"ReplyPost\" value= \""+ str(data["_id"]) +"\">Reply</button><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
      else:
           option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
@@ -227,9 +227,9 @@ def reply_to_post():
     
     if not message == "" and not message.isspace() and len(message) < 251 or not temp_file_id == None:
         if not temp_file_id == None:
-             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now()), "replys": []}
+             data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now()), "replys": True, "repliedTo": main_post}
         else:
-            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now()), "replys": []}         
+            data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now()), "replys": True, "repliedTo": main_post}         
     else:
         if len(message) > 251:
             return render_template('home.html', message=posts_to_html("Must be less than 251 characters."))
@@ -238,14 +238,11 @@ def reply_to_post():
         else:
             return render_template('home.html', message=posts_to_html("Unknown Error."))
    
-    try:
-        temp_reply = collection.find_one({"_id": ObjectId(main_post)})['replys']
-        temp_reply.append(data['_id'])
-        collection.find_one_and_update({"_id": ObjectId(main_post)}, {'$set': {"replys": temp_reply}})    
-    except:
-        temp_reply = reply.find_one({"_id": ObjectId(main_post)})['replys']
-        temp_reply.append(data['_id'])
-        reply.find_one_and_update({"_id": ObjectId(main_post)}, {'$set': {"replys": temp_reply}})
+    
+    temp_reply = collection.find_one({"_id": ObjectId(main_post)})['replys']
+    temp_reply.append(data['_id'])
+    collection.find_one_and_update({"_id": ObjectId(main_post)}, {'$set': {"replys": temp_reply}})    
+  
     reply.insert(data)
     return redirect(url_for("home"))
 
@@ -267,6 +264,9 @@ def delPost():
         db_doc = reply.find_one_and_delete({'_id': ObjectId(doc_id)})
         if not db_doc['pic_id'] == '0':
             fs.delete({'_id': ObjectId(db_doc['pic_id'])})
+        temp_main = collection.find_one({"_id": ObjectId(db_doc['repliesTo'])})['replys']
+        temp_main.remove(doc_id)
+        collection.find_one_and_update({"_id": ObjectId(db_doc['repliesTo'])}, {"$set": {"replys": temp_main}})
     return redirect(url_for("home"))
 
 
