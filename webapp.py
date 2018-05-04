@@ -196,7 +196,7 @@ def posts_to_html(data = None):
                option += single_post_to_html(i)
                q_reply.append(i)
                for j in q_reply:
-                    for a in reversed(j):   
+                    for a in reversed(j['replys']):   
                          option += single_post_to_html(reply.find_one({"_id": ObjectId(a)}))
                          if not a in q_reply:
                               q_reply.append(a)
