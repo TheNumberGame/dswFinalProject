@@ -203,8 +203,8 @@ def posts_to_html(data = None):
                               j['replys'].remove(a)
                          else:
                               option += single_post_to_html(temp_reply)
-                              if not a in q_reply:
-                                   q_reply.append(reply.find_one({"_id": ObjectId(a)}))
+                              #if not a in q_reply:
+                              #     q_reply.append(reply.find_one({"_id": ObjectId(a)}))
                option += Markup("</div>")
      except Exception as ex:
           logging.exception('FAILED')
