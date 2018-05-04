@@ -197,11 +197,15 @@ def posts_to_html(data = None):
                option += single_post_to_html(i)
                q_reply.append(i)
                for j in q_reply:
+                    print('layer 1')
                     for a in reversed(j['replys']):
+                         print('layer 2')
                          temp_reply = reply.find_one({"_id": ObjectId(a)})
                          if temp_reply == None:
+                              print('layer 4')
                               j['replys'].remove(a)
                          else:
+                              print('layer 2.1')
                               option += single_post_to_html(temp_reply)
                               #if not a in q_reply:
                               #     q_reply.append(reply.find_one({"_id": ObjectId(a)}))
