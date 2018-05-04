@@ -11,4 +11,3 @@ pymongo
 datetime
 bson
 flask_socketio
-logging
