@@ -201,8 +201,8 @@ def posts_to_html(data = None):
                          if not a in q_reply:
                               q_reply.append(a)
                option += Markup("</div>")
-     except:
-          option += str(data)
+     except Exception as ex:
+          option += str(ex)
      return option
 
 def date_of_post(date = None):
