@@ -105,8 +105,8 @@ input:hover {
 
 img
 {
-  	width: 90%;
-  	height: 2%;
+  	width: 100%;
+  	height: 100%;
 	border: 1px solid #000000;
      	display: block;
      	border-radius: 8px;
