@@ -189,15 +189,20 @@ def single_post_to_html(data = None):
         
 def posts_to_html(data = None):
      option = ""
+     q_reply = []
      try:
           for i in data.sort('date', -1):
                option += Markup("<div class=\"mesBubble\">")
                option += single_post_to_html(i)
-               for j in reversed(i['replys']):
-                    option += single_post_to_html(reply.find_one({"_id": ObjectId(j)}))
+               q_reply.append(i)
+               for j in q_reply:
+                    for a in reversed(j):   
+                         option += single_post_to_html(reply.find_one({"_id": ObjectId(a)}))
+                         if not a in q_reply:
+                              q_reply.append(a)
                option += Markup("</div>")
      except:
-          option += data
+          option += str(data)
      return option
 
 def date_of_post(date = None):
