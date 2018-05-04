@@ -202,7 +202,7 @@ def posts_to_html(data = None):
                               q_reply.append(a)
                option += Markup("</div>")
      except Exception as ex:
-          option += str(ex)
+          log.exception('FAILED')
      return option
 
 def date_of_post(date = None):
