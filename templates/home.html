@@ -3,6 +3,7 @@
 
 {% block content %}
  <img src="{{url_for('static',filename='SocialHourlogo.jpg')}}" alt="dsfdsa">
+ <br>
 {% if 'github_token' in session %}
 <form action="/posted" enctype="multipart/form-data" method="post">
   <textarea name="message" style="width:100%; height:100px;"></textarea>
