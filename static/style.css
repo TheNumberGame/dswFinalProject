@@ -62,10 +62,11 @@ p {
 
 .container
 {
-	/*height:45;
-	width: 15;*/
-	max-height: 300px;
-     	max-width: 900px;
+	height:400;
+	width: 900;
+	max-height: 30%;
+     	max-width:60%;
+	
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 768px)
 {
