@@ -62,7 +62,7 @@ def home():
 
 @app.route('/profile/<name>')
 def profile(name = None):
-        feed = ''
+        #feed = ''
         data = user_info.find_one({'user_name': str(name)})
         profile_img = ''
         option = ''
@@ -78,9 +78,9 @@ def profile(name = None):
             profile_bio = Markup("<p>No Profile Bio</p>")
            
         if 'user_data' in session and not data == None:
-            for i in collection.find().sort('date', -1):
-                if i['name'] == name:
-                    feed += single_post_to_html(i)
+            #for i in collection.find().sort('date', -1):
+            #    if i['name'] == name:
+            #        feed += single_post_to_html(i)
             if session['user_data']['login'] == name:
                 profile_bio += Markup("<br><form action=\"/bio\" method=\"post\"><textarea name=\"Bio\" style=\"width:100%; height:100px;\"></textarea><input type=\"submit\" value=\"Change Bio\"></form>")
                 option = Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"Change Profile Picture\"></form>")
@@ -88,7 +88,7 @@ def profile(name = None):
                 option = Markup("<form action=\"/unFriend\" method=\"post\"><br><button type=\"submit\" name=\"unFriend\" value= \""+ name +"\">UnFollow</button></form>")
             else:
                 option = Markup("<form action=\"/addFriend\" method=\"post\"><br><button type=\"submit\" name=\"AddFriend\" value= \""+ name +"\">Follow</button></form>")
-        return render_template('profile.html', profile_pic = profile_img,name = name, setting = option, description = profile_bio, posts = feed)
+        return render_template('profile.html', profile_pic = profile_img,name = name, setting = option, description = profile_bio, posts = posts_to_html(collection.find(), name))
 
 @app.route('/bio', methods=['POST'])
 def profile_description():
@@ -188,15 +188,16 @@ def single_post_to_html(data):
           option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
      return option
         
-def posts_to_html(data = None):
+def posts_to_html(data = None, name = None):
      option = ""
      try:
           for i in data.sort('date', -1):
                option += Markup("<div class=\"mesBubble\">")
-               option += single_post_to_html(i)
-               for j in i['replys']:
-                    option += single_post_to_html(reply.find_one({"_id": ObjectId(j)}))
-               option += Markup("</div>")
+               if name == i['name'] or name == None:
+                    option += single_post_to_html(i)
+                    for j in i['replys']:
+                         option += single_post_to_html(reply.find_one({"_id": ObjectId(j)}))
+                    option += Markup("</div>")
      except Exception as ex:
           logging.exception('FAILED')
      return option
