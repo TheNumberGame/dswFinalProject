@@ -65,7 +65,7 @@ p {
 	height:900;
 	width: 450;
 	max-height: 100%;
-     	max-width:60%;
+     	max-width:20%;
 	
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 768px)
