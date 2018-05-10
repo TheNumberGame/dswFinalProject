@@ -172,7 +172,13 @@ def check_extension(ext):
      if ext.split(".")[1] in VALID_EXTENSIONS:
         return True
      return False
-        
+
+def check_bad_words(message)
+my_list = message
+for i in my_list
+    if my_list[i] == 'fuck'
+        return flash('Don't use bad language you idiot!')
+    
 def single_post_to_html(data):
      option = Markup("<p class=\"mes\" ><span style=\"color:blue;\"><a href=\"/profile/"+ str(data['name']) +"\">" + data["name"] + "</a></span>: ")
      if not data['pic_id'] == '0':
