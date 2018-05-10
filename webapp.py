@@ -62,7 +62,6 @@ def home():
 
 @app.route('/profile/<name>')
 def profile(name = None):
-        #feed = ''
         data = user_info.find_one({'user_name': str(name)})
         profile_img = ''
         option = ''
@@ -78,9 +77,6 @@ def profile(name = None):
             profile_bio = Markup("<p>No Profile Bio</p>")
            
         if 'user_data' in session and not data == None:
-            #for i in collection.find().sort('date', -1):
-            #    if i['name'] == name:
-            #        feed += single_post_to_html(i)
             if session['user_data']['login'] == name:
                 profile_bio += Markup("<br><form action=\"/bio\" method=\"post\"><textarea name=\"Bio\" style=\"width:100%; height:100px;\"></textarea><input type=\"submit\" value=\"Change Bio\"></form>")
                 option = Markup("<form action=\"/proPic\" enctype=\"multipart/form-data\" method=\"post\"><br><input name=\"file\" type=\"file\"><br><input type=\"submit\" value=\"Change Profile Picture\"></form>")
