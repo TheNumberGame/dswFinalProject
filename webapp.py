@@ -177,7 +177,7 @@ def check_bad_words(message):
     my_list = message
     for i in my_list:
         if my_list[i] == 'fuck':
-            flash('Don't use bad language you idiot!')
+            flash('Do not use bad language you idiot!')
     
 def single_post_to_html(data):
      option = Markup("<p class=\"mes\" ><span style=\"color:blue;\"><a href=\"/profile/"+ str(data['name']) +"\">" + data["name"] + "</a></span>: ")
