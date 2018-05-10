@@ -174,10 +174,10 @@ def check_extension(ext):
      return False
 
 def check_bad_words(message)
-my_list = message
-for i in my_list
-    if my_list[i] == 'fuck'
-        return flash('Don't use bad language you idiot!')
+    my_list = message
+    for i in my_list
+        if my_list[i] == 'fuck'
+            return flash('Don't use bad language you idiot!')
     
 def single_post_to_html(data):
      option = Markup("<p class=\"mes\" ><span style=\"color:blue;\"><a href=\"/profile/"+ str(data['name']) +"\">" + data["name"] + "</a></span>: ")
