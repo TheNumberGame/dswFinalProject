@@ -58,7 +58,7 @@ def login():
 
 @app.route('/') 
 def home():
-        return render_template('home.html', posts=posts_to_html(collection.find()))
+        return render_template('home.html', posts=posts_to_html(collection.find()),flash('http://www.coastalview.com/opinion/fathers-and-sons/article_6c383b76-4ad5-11e7-b8cf-dbc80ce4592e.html'))
 
 @app.route('/profile/<name>')
 def profile(name = None):
