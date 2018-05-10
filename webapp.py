@@ -173,7 +173,7 @@ def check_extension(ext):
         return True
      return False
 
-def check_bad_words(message)
+def check_bad_words(message):
     my_list = message
     for i in my_list
         if my_list[i] == 'fuck'
