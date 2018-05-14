@@ -188,7 +188,7 @@ def posts_to_html(data = None, name = None):
      option = ""
      try:
           for i in data.sort('date', -1):
-               if name == i['name'] or name == None:
+               if name == i['name'] or name == None or i['name'] in name:
                     option += Markup("<div class=\"mesBubble\">")
                     option += single_post_to_html(i)
                     for j in i['replys']:
