@@ -63,9 +63,6 @@ def home():
 @app.route('/profile/<name>')
 def profile(name = None):
         data = user_info.find_one({'user_name': str(name)})
-        profile_img = ''
-        option = ''
-        profile_bio = ''
         if not data == None and not data['profile_picture'] == '0':
             profile_img = Markup("<img src=\"/img/"+ str(data['profile_picture'])+"\" alt=\"picture\" class=\"proPicture\">")
         else:
@@ -305,7 +302,6 @@ def authorized():
             message='You were successfully logged in as ' + session['user_data']['login']
         except Exception as inst:
             session.clear()
-            print(inst)
             message='Unable to login, please try again.  '
     return render_template('home.html', message=message, posts=posts_to_html(collection.find()))
 
