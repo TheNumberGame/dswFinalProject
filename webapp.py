@@ -188,8 +188,8 @@ def posts_to_html(data = None, name = None):
      option = ""
      try:
           for i in data.sort('date', -1):
-               option += Markup("<div class=\"mesBubble\">")
                if name == i['name'] or name == None:
+                    option += Markup("<div class=\"mesBubble\">")
                     option += single_post_to_html(i)
                     for j in i['replys']:
                          option += single_post_to_html(reply.find_one({"_id": ObjectId(j)}))
