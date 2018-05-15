@@ -257,7 +257,7 @@ def delPost():
         db_doc = collection.find_one_and_delete({'_id': ObjectId(doc_id)})
         if not db_doc['pic_id'] == '0':
             fs.delete({'_id': ObjectId(db_doc['pic_id'])})
-        for i in db_doc['replys']
+        for i in db_doc['replys']:
             db_reply = reply.find_one_and_delete({'_id': ObjectId(doc_id)})
             if not db_doc['pic_id'] == '0':
                 fs.delete({'_id': ObjectId(db_doc['pic_id'])})
