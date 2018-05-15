@@ -167,18 +167,21 @@ def check_extension(ext):
      return False
     
 def single_post_to_html(data):
-     option = Markup("<p class=\"mes\" ><span style=\"color:blue;\"><a href=\"/profile/"+ str(data['name']) +"\">" + data["name"] + "</a></span>: ")
-     if not data['pic_id'] == '0':
-          option += Markup("<img src=\"/img/"+ str(data['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ data["message"])
+     if data == None:
+          return Markup("<p>Post Not Found.</p>")
      else:
-          option += data['message']
-     if 'user_data' in session:
-          if data['name'] == session['user_data']['login']:
-               option += Markup("<br><button type=\"submit\" name=\"DeletePost\" form=\"deleteForm\" value= \""+ str(data["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
-          elif not data['replys'] == True:
-               option += Markup("<br><button class=\"toTextBox\" type=\"button\" name=\"ReplyPost\" value= \""+ str(data["_id"]) +"\">Reply</button><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
-     else:
-          option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
+          option = Markup("<p class=\"mes\" ><span style=\"color:blue;\"><a href=\"/profile/"+ str(data['name']) +"\">" + data["name"] + "</a></span>: ")
+          if not data['pic_id'] == '0':
+               option += Markup("<img src=\"/img/"+ str(data['pic_id'])+"\" alt=\"picture\" class=\"imgPost\">"+ data["message"])
+          else:
+               option += data['message']
+          if 'user_data' in session:
+               if data['name'] == session['user_data']['login']:
+                    option += Markup("<br><button type=\"submit\" name=\"DeletePost\" form=\"deleteForm\" value= \""+ str(data["_id"]) +"\">Delete Post</button>  <span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
+               elif not data['replys'] == True:
+                    option += Markup("<br><button class=\"toTextBox\" type=\"button\" name=\"ReplyPost\" value= \""+ str(data["_id"]) +"\">Reply</button><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
+          else:
+               option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
      return option
         
 def posts_to_html(data = None, name = None):
@@ -254,8 +257,12 @@ def delPost():
         db_doc = collection.find_one_and_delete({'_id': ObjectId(doc_id)})
         if not db_doc['pic_id'] == '0':
             fs.delete({'_id': ObjectId(db_doc['pic_id'])})
+        for i in db_doc['replys']
+            db_reply = reply.find_one_and_delete({'_id': ObjectId(doc_id)})
+            if not db_doc['pic_id'] == '0':
+                fs.delete({'_id': ObjectId(db_doc['pic_id'])})
     except:
-        db_doc = reply.find_one_and_delete({'_id': ObjectId(doc_id)})
+        db_reply = reply.find_one_and_delete({'_id': ObjectId(doc_id)})
         if not db_doc['pic_id'] == '0':
             fs.delete({'_id': ObjectId(db_doc['pic_id'])})
         temp_main = collection.find_one({"_id": ObjectId(db_doc['repliesTo'])})['replys']
