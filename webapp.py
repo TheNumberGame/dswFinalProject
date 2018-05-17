@@ -60,6 +60,10 @@ def login():
 def home():
         return render_template('home.html', posts=posts_to_html(collection.find()))
 
+@app.route('/quiz') 
+def quiz():
+        return render_template('quiz.html')
+
 @app.route('/profile/<name>')
 def profile(name = None):
         feed = ''
