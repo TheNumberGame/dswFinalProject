@@ -5,3 +5,23 @@ $(document).ready( function(){
           $(this).replaceWith(textBox);
      });
 });
+
+
+
+
+
+$(document).ready(function(){
+	$("#Q1").click(function(){
+		$("#A1").slideDown();
+	});
+});
+$(document).ready(function(){
+	$("#Q2").click(function(){
+		$("#A2").slideDown();
+	});
+});
+$(document).ready(function(){
+	$("#Q3").click(function(){
+		$("#A3").slideDown();
+	});
+});
