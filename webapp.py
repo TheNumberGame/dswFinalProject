@@ -266,7 +266,7 @@ def delPost():
         if not db_reply['pic_id'] == '0':
             fs.delete({'_id': ObjectId(db_doc['pic_id'])})
         temp_main = collection.find_one({"_id": ObjectId(db_reply['repliedTo'])})['replys']
-        temp_main.remove(doc_id)
+        temp_main.remove(ObjectId(doc_id))
         collection.find_one_and_update({"_id": ObjectId(db_reply['repliedTo'])}, {"$set": {"replys": temp_main}})
     return redirect(url_for("home"))
 
