@@ -65,7 +65,7 @@ def quiz():
         return render_template('quiz.html')
 
 @app.route('/messaging') 
-def quiz():
+def messaging():
         return render_template('messaging.html')
 
 @app.route('/profile/<name>')
