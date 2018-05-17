@@ -116,3 +116,30 @@ img
 	max-height: 250px;
      	max-width: 300px;
 }
+
+
+
+
+
+h2{
+	font-size:200%
+}
+#A1{
+font-size: 100%;
+color: red;
+margin: 0px;
+display: none;
+}
+#A2{
+font-size: 100%;
+color: red;
+margin: 0px;
+display: none;
+}
+#A3{
+font-size: 100%;
+color: red;
+margin: 0px;
+display: none;
+}
+
