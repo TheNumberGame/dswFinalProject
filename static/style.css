@@ -53,10 +53,10 @@ p {
 	border: 1px solid #000000;
 	display: block;
 	border-radius: 50%;
-	width: auto;
-     	height: auto;
-     	max-height: 200px;
-     	max-width: 200px;
+	width: 200;
+     	height: 200;
+     	/*max-height: 200px;
+     	max-width: 200px;*/
 	
 }
 
