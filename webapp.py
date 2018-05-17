@@ -135,6 +135,10 @@ def follower():
      option += Markup("</ul>")
      return render_template('follower.html', follow = option)
 
+@app.route('/privateMessage')
+def prvt_mssg():
+     return render_template('privateMessage.html')
+
 @app.route('/posted', methods=['POST'])
 def post():
     if 'file' in request.files and check_extension(request.files['file'].filename):
