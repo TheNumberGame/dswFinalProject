@@ -13,10 +13,11 @@
       <li><a href="/">Home</a></li>
       {% if logged_in %}
       	{% set temp = "/profile/"+ session['user_data']['login'] %}
+	{% set tempM = "/privateMessage/"+session['user_data']['login'] %}
       	<li><a href= "{{ temp }}">Profile</a></li>
       	<li><a href="/friends">Following</a></li>
       	<li><a href ="/follower">Followers</a></li>
-	<li><a href="/privateMessage">Message</a></li>
+	<li><a href="{{ tempM }}">Message</a></li>
       {% endif %}
     </ul>
     <ul class="nav navbar-nav navbar-right">
