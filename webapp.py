@@ -135,9 +135,13 @@ def follower():
      option += Markup("</ul>")
      return render_template('follower.html', follow = option)
 
-@app.route('/privateMessage')
-def prvt_mssg():
+@app.route('/privateMessage/<name>')
+def prvt_mssg(name = None):
      return render_template('privateMessage.html')
+
+def create_message_room():
+     user_one = request.form['userOne']
+     user_two = request.form['userTwo']
 
 @app.route('/posted', methods=['POST'])
 def post():
