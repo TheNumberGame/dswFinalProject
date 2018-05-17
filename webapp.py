@@ -31,6 +31,7 @@ usr = clt[os.environ["MONGO_DBNAME"]]
 collection = usr['chat'] #This is contains all posts made to main feed
 reply = usr['reply'] #contains the replys to chat
 user_info = usr['user_data'] #contains user data
+private_message = usr['private_message']
 fs = gridfs.GridFS(usr, 'pictures') #This contains the pictures
 
 github = oauth.remote_app(
