@@ -72,8 +72,6 @@ def quiz():
         session['correct'] += 1 
     if '10' == request.form["e"]:
         session['correct'] += 1     
-    for key in session:
-        print(session[key])
     return render_template('quiz.html')
 
 @app.route('/messaging') 
