@@ -62,7 +62,19 @@ def home():
 
 @app.route('/quiz') 
 def quiz():
-        return render_template('quiz.html')
+    if 'Quartz' == request.form["a"]:
+        session['correct'] += 1 
+    if 'Magnetism' == request.form["b"]:
+        session['correct'] += 1 
+    if 'Calcite' == request.form["c"]:
+        session['correct'] += 1     
+    if 'Talc' == request.form["d"]:
+        session['correct'] += 1 
+    if '10' == request.form["e"]:
+        session['correct'] += 1     
+    for key in session:
+        print(session[key])
+    return render_template('quiz.html')
 
 @app.route('/messaging') 
 def messaging():
