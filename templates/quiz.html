@@ -1,6 +1,22 @@
 {% extends 'layout.html' %}
 {% block title %}Quiz{% endblock %}
 {% block content %}
+ <p id="q1">
+    What is one of the most common minerals in the world?
+   </p>
+   <h1>Question 1</h1>
+   
+   <form action="/q2" method = "POST">
+  Answer:<br>
+
+   <!--question 1-->
+
+   <input id="a" type="radio" name="a" value="Quartz" > Quartz<br>
+   <input id="b" type="radio" name="a" value="Granite" > Granite<br>
+   <input id="c" type="radio" name="a" value="Emerald" > Emerald<br>
+   <input id="d" type="radio" name="a" value="Brockite" > Brockite<br>
+   <input type="submit">
+ </form> 
 
 {% endblock %}
 
