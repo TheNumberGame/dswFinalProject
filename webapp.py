@@ -62,17 +62,6 @@ def home():
 
 @app.route('/quiz') 
 def quiz():
-    session['correct'] = 0    
-    if 'Quartz' == request.form["a"]:
-        session['correct'] += 1 
-    if 'Magnetism' == request.form["b"]:
-        session['correct'] += 1 
-    if 'Calcite' == request.form["c"]:
-        session['correct'] += 1     
-    if 'Talc' == request.form["d"]:
-        session['correct'] += 1 
-    if '10' == request.form["e"]:
-        session['correct'] += 1     
     return render_template('quiz.html')
 
 @app.route('/messaging') 
