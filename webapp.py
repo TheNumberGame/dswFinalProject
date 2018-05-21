@@ -62,6 +62,7 @@ def home():
 
 @app.route('/quiz') 
 def quiz():
+    session['correct'] = 0    
     if 'Quartz' == request.form["a"]:
         session['correct'] += 1 
     if 'Magnetism' == request.form["b"]:
