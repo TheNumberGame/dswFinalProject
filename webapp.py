@@ -60,7 +60,7 @@ def login():
 def home():
         return render_template('home.html', posts=posts_to_html(collection.find()))
 
-@app.route('/quiz') 
+@app.route('/quiz',methods=['GET','POST']) 
 def quiz():
     return render_template('quiz.html')
 
