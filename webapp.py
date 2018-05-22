@@ -303,8 +303,7 @@ def update_profile_pic():
         temp_file_id = fs.put(fl, filename=fl.filename)
     else:
         temp_file_id = '0'
-    if user_info.find_one({'user_name': session['user_data']['login']})['profile_picture'] == '0':
-        user_info.update_one({'user_name': session['user_data']['login']}, {'$set': {'profile_picture': str(temp_file_id)}})
+    user_info.update_one({'user_name': session['user_data']['login']}, {'$set': {'profile_picture': str(temp_file_id)}})
     return redirect('/profile/'+session['user_data']['login'])
 
 
