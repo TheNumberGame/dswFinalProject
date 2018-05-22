@@ -9,5 +9,4 @@ flask_socketio
 Flask-OAuthlib
 pymongo
 datetime
-bson
 flask_socketio
