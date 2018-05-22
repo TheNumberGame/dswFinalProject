@@ -31,7 +31,7 @@ usr = clt[os.environ["MONGO_DBNAME"]]
 collection = usr['chat'] #This is contains all posts made to main feed
 reply = usr['reply'] #contains the replys to chat
 user_info = usr['user_data'] #contains user data
-private_message = usr['private_message']
+private_message = usr['private_message'] #private messages
 fs = gridfs.GridFS(usr, 'pictures') #This contains the pictures
 
 github = oauth.remote_app(
@@ -193,7 +193,7 @@ def single_post_to_html(data):
                option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
      return option
         
-def posts_to_html(data = None, name = None):
+def posts_to_html(data = None, name = None, message = None):
      option = ""
      try:
           for i in data.sort('date', -1):
