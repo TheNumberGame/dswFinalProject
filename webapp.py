@@ -63,7 +63,7 @@ def home():
 @app.route('/quiz',methods=['GET','POST']) 
 def quiz():
     session['correct'] = 0
-    if 'Calcite' == request.form["c"]:
+    if 'Brockite' == request.form["c"]:
         session['correct'] += 1     
     return render_template('quiz.html')
 
