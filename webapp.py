@@ -64,7 +64,7 @@ def home():
 def cool():
     return render_template('quiz.html')
 
-@app.route('/quiz',methods=['GET','POST']) 
+@app.route('/yes',methods=['GET','POST']) 
 def quiz():
     session['correct'] = 0
     print("c" in request.form)
