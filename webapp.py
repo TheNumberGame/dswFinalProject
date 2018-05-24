@@ -63,8 +63,9 @@ def home():
 @app.route('/quiz',methods=['GET','POST']) 
 def quiz():
     session['correct'] = 0
+    print("c" in request.form)
     if 'Brockite' == request.form["c"]:
-        session['correct'] += 1     
+        session['correct'] =  session['correct'] + 1   
     return render_template('quiz.html')
 
 @app.route('/messaging') 
