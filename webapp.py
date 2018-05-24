@@ -151,18 +151,18 @@ def post():
      
     message = request.form['message']
     
-    if not message == "" and not message.isspace() and len(message) < 251 or not temp_file_id == None:
+    if not message == "" and not message.isspace() and len(message) < 250 or not temp_file_id == None:
         if not temp_file_id == None:
              data = { "_id": ObjectId(), "pic_id": temp_file_id, "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now()), "replys": []}
         else:
             data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now()), "replys": []}         
     else:
-        if len(message) > 251:
-            return render_template('home.html', message=posts_to_html("Must be less than 251 characters."))
+        if len(message) > 250:
+            return render_template('home.html', posts=posts_to_html(collection.find()), message='Can not be more than 250 characters.')
         elif message == "" and message.isspace() or temp_file_id == None:
-            return render_template('home.html', message=posts_to_html("There is no text or picture."))
+            return render_template('home.html', posts=posts_to_html(collection.find()), message='No post.')
         else:
-            return render_template('home.html', message=posts_to_html("Unknown Error."))
+            return render_template('home.html', posts=posts_to_html(collection.find()), message='Unknown Error.')
         
     collection.insert(data)
     
