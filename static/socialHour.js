@@ -1,6 +1,6 @@
 $(document).ready( function(){
      $('input[type="submit"]').click(function () {
-          $(this).append('<img id="loaderImage" src="static/ajax-loader.gif" />');
+          $(this).parent().append('<img id="loaderImage" src="static/ajax-loader.gif" />');
           $(this).hide();
      });
      $('button[type="submit"]').click(function () {
