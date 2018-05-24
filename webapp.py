@@ -61,6 +61,10 @@ def home():
         return render_template('home.html', posts=posts_to_html(collection.find()))
 
 @app.route('/quiz',methods=['GET','POST']) 
+def cool():
+    return render_template('quiz.html')
+
+@app.route('/quiz',methods=['GET','POST']) 
 def quiz():
     session['correct'] = 0
     print("c" in request.form)
