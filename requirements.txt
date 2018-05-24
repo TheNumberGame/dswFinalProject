@@ -7,6 +7,6 @@ wheel
 gunicorn
 flask_socketio
 Flask-OAuthlib
-pymongo==3.6.0
+pymongo==3.6.1
 datetime
 flask_socketio
