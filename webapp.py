@@ -121,8 +121,6 @@ def friends():
         for i in data['following']:
             option += Markup("<li><a href=\"/profile/"+ i +"\">"+ i +"</a></li>")
         option += Markup("</ul>")
-        #for i in collection.find().sort('date', -1):
-        #    if i['name'] in data['following']:
         feed += posts_to_html(collection.find(), data['following'])
         return render_template('friends.html', Following = option, posts = feed)
 
@@ -177,7 +175,7 @@ def check_extension(ext):
     
 def single_post_to_html(data):
      if data == None:
-          return Markup("<p>Post Not Found.</p>")
+          return Markup("<p>Post not found.</p>")
      else:
           option = Markup("<p class=\"mes\" ><span style=\"color:blue;\"><a href=\"/profile/"+ str(data['name']) +"\">" + data["name"] + "</a></span>: ")
           if not data['pic_id'] == '0':
@@ -193,7 +191,7 @@ def single_post_to_html(data):
                option += Markup("<br><span style=\"color:green;\">Date Posted</span>: "+ date_of_post(data["date"]) +"</p>")
      return option
         
-def posts_to_html(data = None, name = None, message = None):
+def posts_to_html(data = None, name = None):
      option = ""
      try:
           for i in data.sort('date', -1):
