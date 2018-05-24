@@ -39,6 +39,7 @@
 </div>-->
 
 <br>
+{{ message }}
 {% if 'github_token' in session %}
 <form action="/posted" enctype="multipart/form-data" method="post">
   <textarea name="message" style="width:100%; height:100px;"></textarea>
@@ -50,7 +51,6 @@
 {% else %}
   <p>Must be logged in.</p>
 {% endif %}
-{{ message }}
 <form id="deleteForm" action="/b" method="post"></form>
 <form id="replyForm" action="/reply" enctype="multipart/form-data" method="post"></form>
 {{ posts }}
