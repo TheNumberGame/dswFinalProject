@@ -273,7 +273,7 @@ def reply_to_post():
 def search_person():
      name = request.args['search']
      if user_info.find_one({'user_name': name}) == None:
-          return redirect('/')
+          return render_template('home.html', posts=posts_to_html(collection.find()), message='No User.')
      return redirect('/profile/'+name)
 
 @app.route('/b', methods=['POST'])
