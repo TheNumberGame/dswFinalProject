@@ -74,7 +74,7 @@ def profile(name = None):
         else:
             profile_bio = Markup("<p>No Profile Bio</p>")
         
-	option = ''
+        option = ''
         if 'user_data' in session and not data == None:
             if session['user_data']['login'] == name:
                 profile_bio += Markup("<br><form action=\"/bio\" method=\"post\"><textarea name=\"Bio\" style=\"width:100%; height:100px;\"></textarea><input type=\"submit\" value=\"Change Bio\"></form>")
