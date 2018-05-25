@@ -193,18 +193,36 @@ def single_post_to_html(data):
         
 def posts_to_html(data = None, name = None):
      option = ""
+     count = 0
+     page = 0
+     pg = "name=\""+str(page)+"\" style=\"display: block\""
      try:
           for i in data.sort('date', -1):
                if name == i['name'] or name == None or i['name'] in name:
-                    option += Markup("<div class=\"mesBubble\">")
+                    option += Markup("<div class=\"mesBubble page-num\""+ pg +">")
                     option += single_post_to_html(i)
                     for j in i['replys']:
                          option += single_post_to_html(reply.find_one({"_id": ObjectId(j)}))
                     option += Markup("</div>")
+                    count+=1
+                    if count%20 == 0:
+                         page+=1
+                         pg = "name=\""+str(page)+"\" style=\"display: none\""
+                    #if count > 0:
+                     #    pg = "name=\""+str(page)+"\" style=\"display: none\""
+          if not count%20 == 0:
+               page+=1
      except Exception as ex:
           logging.exception('FAILED')
-     return option
+     return create_prag(page) + option
 
+def create_prag(count):
+	option = Markup('<ul class=\"pagination\">')
+	for i in range(count):
+		option += Markup("<li><button type=\"button\" class=\"pag\" value=\""+str(i)+"\">"+str(i+1)+"</button></li>")
+	option += Markup('</ul>')
+	return option
+	 
 def date_of_post(date = None):
      temp_date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
      today_date = datetime.now()

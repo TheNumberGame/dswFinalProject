@@ -1,4 +1,15 @@
 $(document).ready( function(){
+	 $('.pag').click( function(){
+		 var value = $(this).val();
+		 var elm = document.getElementsByClassName("page-num");
+		 for(var i = 0; i < elm.length; i++){
+			 if(elm[i].getAttribute("name") == value){
+				 elm[i].setAttribute("style", "display: block");
+			 }else{
+				 elm[i].setAttribute("style", "display: none");
+			 }
+		 }
+	 });
      $('input[type="submit"]').click(function () {
           $(this).parent().append('<img id="loaderImage" src="static/ajax-loader.gif" />');
           $(this).hide();
