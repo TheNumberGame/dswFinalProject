@@ -66,7 +66,6 @@ def cool():
 
 @app.route('/Q1',methods=['GET','POST']) 
 def Q1():
-    session['correct'] = 0
     print("c" in request.form)
     if 'Brockite' == request.form["c"]:
         session['correct'] =  session['correct'] + 1   
@@ -74,7 +73,6 @@ def Q1():
 
 @app.route('/Q2',methods=['GET','POST']) 
 def Q2():
-    session['correct'] = 0
     print("c" in request.form)
     if 'Brockite' == request.form["c"]:
         session['correct'] =  session['correct'] + 1   
@@ -82,7 +80,6 @@ def Q2():
 
 @app.route('/Q3',methods=['GET','POST']) 
 def Q3():
-    session['correct'] = 0
     print("c" in request.form)
     if 'Brockite' == request.form["c"]:
         session['correct'] =  session['correct'] + 1   
@@ -90,7 +87,6 @@ def Q3():
 
 @app.route('/Q4',methods=['GET','POST']) 
 def Q4():
-    session['correct'] = 0
     print("c" in request.form)
     if 'Brockite' == request.form["c"]:
         session['correct'] =  session['correct'] + 1   
@@ -98,7 +94,6 @@ def Q4():
 
 @app.route('/Q5',methods=['GET','POST']) 
 def Q5():
-    session['correct'] = 0
     print("c" in request.form)
     if 'Brockite' == request.form["c"]:
         session['correct'] =  session['correct'] + 1   
