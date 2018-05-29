@@ -22,7 +22,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
 	{% if logged_in %}
-        <li><p class="navbar-text">Github userid: {{ session['user_data']['login']}}</li>
+        <li><p class="navbar-text">User: {{ session['user_data']['login']}}</li>
 	{% endif %}
 	<li>
 	{% if logged_in %}
