@@ -255,14 +255,16 @@ def reply_to_post():
             data = { "_id": ObjectId(), "pic_id": "0", "name": session['user_data']['login'], "message": escape(message), "date": str(datetime.now()), "replys": True, "repliedTo": main_post}         
     else:
         if len(message) > 251:
-            return render_template('home.html', message=posts_to_html("Must be less than 251 characters."))
+            return render_template('home.html', posts=posts_to_html(collection.find()), message='Can not be more than 250 characters.')
         elif message == "" and message.isspace() or temp_file_id == None:
-            return render_template('home.html', message=posts_to_html("There is no text or picture."))
+            return render_template('home.html', posts=posts_to_html(collection.find()), message='No post.')
         else:
-            return render_template('home.html', message=posts_to_html("Unknown Error."))
+            return render_template('home.html', posts=posts_to_html(collection.find()), message='Unknown Error.')
    
     
     temp_reply = collection.find_one({"_id": ObjectId(main_post)})['replys']
+    if temp_reply == None:
+        return render_template('home.html', posts=posts_to_html(collection.find()), message='Can not find post.')
     temp_reply.append(data['_id'])
     collection.find_one_and_update({"_id": ObjectId(main_post)}, {'$set': {"replys": temp_reply}})    
   
