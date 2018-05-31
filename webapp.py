@@ -351,7 +351,7 @@ def authorized_github():
         message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)      
     else:
         try:
-            session['github_token'] = (resp['access_token'], '')
+            session['user_token'] = (resp['access_token'], '')
             session['user_data']=github.get('user').data
             if user_info.find_one({'user_name': session['user_data']['login']}) == None:
                 user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0','profile_description': '0', 'following': [], 'followers': []})
@@ -369,7 +369,7 @@ def authorized_google():
         message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)      
     else:
         try:
-            session['github_token'] = (resp['access_token'], '')
+            session['user_token'] = (resp['access_token'], '')
             session['user_data']=google.get('user').data
             if user_info.find_one({'user_name': session['user_data']['login']}) == None:
                 user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0','profile_description': '0', 'following': [], 'followers': []})
@@ -381,7 +381,11 @@ def authorized_google():
 
 @github.tokengetter
 def get_github_oath_token():
-     return session.get('github_token')
+     return session.get('user_token')
+
+@google.tokengetter
+def get_google_oath_token():
+     return session.get('user_token')
 
 if __name__ == '__main__':
     app.run()
