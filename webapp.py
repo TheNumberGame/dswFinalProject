@@ -378,7 +378,7 @@ def authorized_google():
         except Exception as inst:
             session.clear()
             logging.exception('FAILED')
-            message='Unable to login, please try again. Error: '
+            message='Unable to login, please try again. '
     return render_template('home.html', message=message, posts=posts_to_html(collection.find()))
 
 @github.tokengetter
