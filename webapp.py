@@ -370,7 +370,7 @@ def authorized_google():
     else:
         try:
             session['user_token'] = (resp['access_token'], '')
-            session['user_data']=google.people().get('people/me', personFields='names,emailAddresses')
+            session['user_data']=google.get('user').data
             print(session['user_data'])
             if user_info.find_one({'user_name': session['user_data']['login']}) == None:
                 user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0','profile_description': '0', 'following': [], 'followers': []})
