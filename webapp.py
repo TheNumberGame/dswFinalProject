@@ -75,6 +75,10 @@ def login_google():
     #collection.update_many({}, {"$set": {"replys": []}})
     return google.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
 
+@app.route('/logPage')
+def login_page():
+    return render_template('login.html')
+
 @app.route('/')
 def home():
         return render_template('home.html', posts=posts_to_html(collection.find()))
