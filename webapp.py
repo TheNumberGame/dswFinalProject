@@ -345,6 +345,7 @@ def logout():
 
 
 @app.route('/login/authorized/github')
+@github.authorized_handler
 def authorized_github():
     resp = github.authorized_response()
     if resp is None:
@@ -363,6 +364,7 @@ def authorized_github():
     return render_template('home.html', message=message, posts=posts_to_html(collection.find()))
 
 @app.route('/login/authorized/google')
+@google.authorized_handler
 def authorized_google():
     resp = google.authorized_response()
     if resp is None:
