@@ -45,6 +45,19 @@ github = oauth.remote_app(
     authorize_url='https://github.com/login/oauth/authorize' 
 )
 
+google = oauth.remote_app('google',
+    base_url='https://www.google.com/accounts/',
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    request_token_url=None,
+    request_token_params={'scope': 'https://www.googleapis.com/auth/userinfo.email',
+                          'response_type': 'code'},
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_method='POST',
+    access_token_params={'grant_type': 'authorization_code'},
+    consumer_key=os.environ['GOOGLE_CLIENT_ID'],
+    consumer_secret=os.environ['GOOGLE_CLIENT_SECRET']
+)
+
 VALID_EXTENSIONS = ['jpeg', 'png', 'jpg', 'PNG']
 PST = timezone(timedelta(hours=-7), name='PST')
 
@@ -322,7 +335,7 @@ def logout():
     return render_template('home.html', message='You were logged out')
 
 
-@app.route('/login/authorized')
+@app.route('/login/authorized/github')
 def authorized():
     resp = github.authorized_response()
     if resp is None:
@@ -332,6 +345,24 @@ def authorized():
         try:
             session['github_token'] = (resp['access_token'], '')
             session['user_data']=github.get('user').data
+            if user_info.find_one({'user_name': session['user_data']['login']}) == None:
+                user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0','profile_description': '0', 'following': [], 'followers': []})
+            message='You were successfully logged in as ' + session['user_data']['login']
+        except Exception as inst:
+            session.clear()
+            message='Unable to login, please try again.  '
+    return render_template('home.html', message=message, posts=posts_to_html(collection.find()))
+
+@app.route('/login/authorized/google')
+def authorized():
+    resp = google.authorized_response()
+    if resp is None:
+        session.clear()
+        message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)      
+    else:
+        try:
+            session['github_token'] = (resp['access_token'], '')
+            session['user_data']=google.get('user').data
             if user_info.find_one({'user_name': session['user_data']['login']}) == None:
                 user_info.insert({'user_name': session['user_data']['login'], 'last_login': str(datetime.now()), 'profile_picture': '0','profile_description': '0', 'following': [], 'followers': []})
             message='You were successfully logged in as ' + session['user_data']['login']
