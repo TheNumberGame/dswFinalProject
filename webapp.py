@@ -65,10 +65,15 @@ PST = timezone(timedelta(hours=-7), name='PST')
 def inject_logged_in():
     return {"logged_in":('github_token' in session)}
 
-@app.route('/login')
+@app.route('/login/github')
 def login():
     #collection.update_many({}, {"$set": {"replys": []}})
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
+
+@app.route('/login/google')
+def login():
+    #collection.update_many({}, {"$set": {"replys": []}})
+    return google.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
 
 @app.route('/')
 def home():
