@@ -73,7 +73,7 @@ def login_github():
 @app.route('/login/google')
 def login_google():
     #collection.update_many({}, {"$set": {"replys": []}})
-    return google.authorize(callback=url_for('authorized_google', _external=True))
+    return google.authorize(callback=url_for('authorized_google', _external=True, _scheme='https'))
 
 @app.route('/logPage')
 def login_page():
