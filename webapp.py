@@ -341,7 +341,7 @@ def logout():
 
 
 @app.route('/login/authorized/github')
-def authorized():
+def authorized_github():
     resp = github.authorized_response()
     if resp is None:
         session.clear()
@@ -359,7 +359,7 @@ def authorized():
     return render_template('home.html', message=message, posts=posts_to_html(collection.find()))
 
 @app.route('/login/authorized/google')
-def authorized():
+def authorized_google():
     resp = google.authorized_response()
     if resp is None:
         session.clear()
