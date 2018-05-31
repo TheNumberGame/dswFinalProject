@@ -346,7 +346,7 @@ def logout():
     return render_template('home.html', message='You were logged out')
 
 
-@app.route('/login/authorized')
+@app.route('/login/authorized/github')
 def authorized():
     resp = github.authorized_response()
     if resp is None:
