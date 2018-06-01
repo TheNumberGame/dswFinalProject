@@ -81,7 +81,7 @@ def Q1():
     return render_template('quiz.html')
     if 'Brockite' == request.form["c"]:
         session['correct'] =  session['correct'] + 1   
-    return render_template('quiz.html',sessions['correct'])
+    return render_template('quiz.html', score = sessions['correct'])
     
 
 @app.route('/messaging') 
