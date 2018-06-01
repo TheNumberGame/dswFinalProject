@@ -110,7 +110,7 @@ def profile(name = None):
 def profile_description():
     mes = request.form['Bio']
     if not mes == "" and not mes.isspace():
-        user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'profile_description': mes}})
+        user_info.update({'user_name': session['user_data']['login']}, {'$set': {'profile_description': mes}})
     return redirect('/profile/'+session['user_data']['login'])
 
 @app.route('/unFriend', methods=['POST'])
@@ -118,10 +118,10 @@ def unfriend():
     user_name = request.form['unFriend']
     user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['following']
     user_client_friends.remove(user_name)
-    user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'following': user_client_friends}})
+    user_info.update({'user_name': session['user_data']['login']}, {'$set': {'following': user_client_friends}})
     user_client_friends = user_info.find_one({'user_name': user_name})['followers']
     user_client_friends.remove(session['user_data']['login'])
-    user_info.find_one_and_update({'user_name': user_name}, {'$set': {'followers': user_client_friends}})
+    user_info.update({'user_name': user_name}, {'$set': {'followers': user_client_friends}})
     return redirect('/profile/'+user_name)
 
 @app.route('/addFriend', methods=['POST'])
@@ -129,10 +129,10 @@ def addFriend():
     user_name = request.form['AddFriend']
     user_client_friends = user_info.find_one({'user_name': session['user_data']['login']})['following']
     user_client_friends.append(user_name)
-    user_info.find_one_and_update({'user_name': session['user_data']['login']}, {'$set': {'following': user_client_friends}})
+    user_info.update({'user_name': session['user_data']['login']}, {'$set': {'following': user_client_friends}})
     user_client_friends = user_info.find_one({'user_name': user_name})['followers']
     user_client_friends.append(session['user_data']['login'])
-    user_info.find_one_and_update({'user_name': user_name}, {'$set': {'followers': user_client_friends}})
+    user_info.update({'user_name': user_name}, {'$set': {'followers': user_client_friends}})
     return redirect('/profile/'+user_name)
 
 @app.route('/friends')
