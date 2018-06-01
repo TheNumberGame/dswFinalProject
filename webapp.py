@@ -62,7 +62,7 @@ PST = timezone(timedelta(hours=-7), name='PST')
 
 @app.context_processor
 def inject_logged_in():
-    return {"logged_in":('github_token' in session)}
+    return {"logged_in":('user_token' in session)}
 
 @app.route('/login/github')
 def login_github():
