@@ -31,7 +31,7 @@ usr = clt[os.environ["MONGO_DBNAME"]]
 collection = usr['chat'] #This is contains all posts made to main feed
 reply = usr['reply'] #contains the replys to chat
 user_info = usr['user_data'] #contains user data
-private_message = usr['private_message'] #private messages
+#private_message = usr['private_message'] #private messages
 fs = gridfs.GridFS(usr, 'pictures') #This contains the pictures
 
 github = oauth.remote_app(
@@ -159,10 +159,6 @@ def follower():
 def prvt_mssg(name = None):
      return render_template('privateMessage.html')
 
-def create_message_room():
-     user_one = request.form['userOne']
-     user_two = request.form['userTwo']
-
 @app.route('/posted', methods=['POST'])
 def post():
     if 'file' in request.files and check_extension(request.files['file'].filename):
@@ -230,8 +226,6 @@ def posts_to_html(data = None, name = None):
                     if count%20 == 0:
                          page+=1
                          pg = "name=\""+str(page)+"\" style=\"display: none\""
-                    #if count > 0:
-                     #    pg = "name=\""+str(page)+"\" style=\"display: none\""
           if not count%20 == 0:
                page+=1
      except Exception as ex:
