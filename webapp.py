@@ -70,35 +70,19 @@ def Q1():
     if 'Brockite' == request.form["c"]:
         session['correct'] =  session['correct'] + 1   
     return render_template('quiz.html')
-
-@app.route('/Q2',methods=['GET','POST']) 
-def Q2():
-    print("c" in request.form)
     if 'Brockite' == request.form["c"]:
         session['correct'] =  session['correct'] + 1   
     return render_template('quiz.html')
-
-@app.route('/Q3',methods=['GET','POST']) 
-def Q3():
-    print("c" in request.form)
     if 'Brockite' == request.form["c"]:
         session['correct'] =  session['correct'] + 1   
     return render_template('quiz.html')
-
-@app.route('/Q4',methods=['GET','POST']) 
-def Q4():
-    print("c" in request.form)
     if 'Brockite' == request.form["c"]:
         session['correct'] =  session['correct'] + 1   
     return render_template('quiz.html')
-
-@app.route('/Q5',methods=['GET','POST']) 
-def Q5():
-    print("c" in request.form)
     if 'Brockite' == request.form["c"]:
         session['correct'] =  session['correct'] + 1   
     return render_template('quiz.html')
-
+    prtint(sessions['correct'])
 
 @app.route('/messaging') 
 def messaging():
