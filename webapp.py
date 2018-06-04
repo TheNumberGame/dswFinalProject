@@ -192,7 +192,7 @@ def single_post_to_html(data):
      return option
         
 def posts_to_html(data = None, name = None):
-     option = ""
+     option = Markup("<form id=\"deleteForm\" action=\"/b\" method=\"post\"></form><form id=\"replyForm\" action=\"/reply\" enctype=\"multipart/form-data\" method=\"post\"></form>")
      try:
           for i in data.sort('date', -1):
                if name == i['name'] or name == None or i['name'] in name:
