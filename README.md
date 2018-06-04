@@ -1,3 +1,3 @@
 Link to the heroku webpage: https://dswfinalproject.herokuapp.com/
 
-BESTWORK is currently 
+BESTWORK is currently deployed
