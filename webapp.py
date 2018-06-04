@@ -210,7 +210,7 @@ def single_post_to_html(data):
      return option
         
 def posts_to_html(data = None, name = None):
-     option = ""
+     option = Markup("<form id=\"deleteForm\" action=\"/b\" method=\"post\"></form><form id=\"replyForm\" action=\"/reply\" enctype=\"multipart/form-data\" method=\"post\"></form>")
      count = 0
      page = 0
      pg = "name=\""+str(page)+"\" style=\"display: block\""
