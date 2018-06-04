@@ -166,7 +166,7 @@ def post():
         
     collection.insert(data)
     
-    return redirect(url_for("home"))
+    return redirect(url_for(request.path))
 
 def check_extension(ext):
      if ext.split(".")[1] in VALID_EXTENSIONS:
@@ -248,7 +248,7 @@ def reply_to_post():
     collection.find_one_and_update({"_id": ObjectId(main_post)}, {'$set': {"replys": temp_reply}})    
   
     reply.insert(data)
-    return redirect(url_for("home"))
+    return redirect(url_for(request.path))
 
 @app.route('/searchPerson')        
 def search_person():
@@ -275,7 +275,7 @@ def delPost():
         temp_main = collection.find_one({"_id": ObjectId(db_reply['repliedTo'])})['replys']
         temp_main.remove(ObjectId(doc_id))
         collection.find_one_and_update({"_id": ObjectId(db_reply['repliedTo'])}, {"$set": {"replys": temp_main}})
-    return redirect(url_for("home"))
+    return redirect(url_for(request.path))
 
 
 @app.route("/img/<filename>")
