@@ -78,10 +78,28 @@ def login_google():
 def login_page():
     return render_template('login.html')
 
-
 @app.route('/quiz',methods=['GET','POST']) 
 def cool():
     return render_template('quiz.html')
+
+@app.route('/Q1',methods=['GET','POST']) 
+def Q1():
+    print("c" in request.form)
+    if 'Brockite' == request.form["c"]:
+        session['correct'] =  session['correct'] + 1   
+    return render_template('quiz.html')
+    if 'Brockite' == request.form["c"]:
+        session['correct'] =  session['correct'] + 1   
+    return render_template('quiz.html')
+    if 'Brockite' == request.form["c"]:
+        session['correct'] =  session['correct'] + 1   
+    return render_template('quiz.html')
+    if 'Brockite' == request.form["c"]:
+        session['correct'] =  session['correct'] + 1   
+    return render_template('quiz.html')
+    if 'Brockite' == request.form["c"]:
+        session['correct'] =  session['correct'] + 1   
+    return render_template('quiz.html', score = sessions['correct'])
 
 @app.route('/')
 def home():
