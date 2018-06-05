@@ -78,6 +78,11 @@ def login_google():
 def login_page():
     return render_template('login.html')
 
+
+@app.route('/quiz',methods=['GET','POST']) 
+def cool():
+    return render_template('quiz.html')
+
 @app.route('/')
 def home():
         return render_template('home.html', posts=posts_to_html(collection.find()))
