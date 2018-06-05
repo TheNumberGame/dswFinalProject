@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block title %}Social Hour Quiz{% endblock %}
+{% block content %}
+
+   <h2>How has your experience been using this website?</h2>
+   
+   <form action="/Q1" method = "POST">
+  Answer:<br>
+
+   <!--question 1-->
+
+   <input id="a" type="radio" name="a" value="Great" > Great<br>
+   <input id="b" type="radio" name="a" value="meh" > Meh<br>
+   <input id="c" type="radio" name="a" value="boring" > Boring<br>
+   <input id="d" type="radio" name="a" value="Bad" > Bad<br>
+   
+
+ 
+<h2>How would you rate this website</h2>
+
+
+   <!--question 2-->
+
+   <input id="a" type="radio" name="b" value=" Great" > Great<br>
+   <input id="b" type="radio" name="b" value="good, but could be improved" > good, but could be improved<br>
+   <input id="c" type="radio" name="b" value="Not so great" > Not so great<br>
+   <input id="d" type="radio" name="b" value="Bad" > Bad<br>
+  
+
+<h2>Would you use this website?</h2>
+   
+  
+
+   <!--question 3-->
+
+   <input id="a" type="radio" name="c" value="Yes" > Yes<br>
+   <input id="b" type="radio" name="c" value="No" > No<br>
+   <input id="c" type="radio" name="c" value="Hell Naw" > Hell Naw<br>
+   <input id="d" type="radio" name="c" value="Maybe" > Maybe<br>
+
+
+<h2>How is your life?</h2>
+   
+ 
+
+   <!--question 4-->
+
+   <input id="a" type="radio" name="d" value="Great" > Great<br>
+   <input id="b" type="radio" name="d" value="Not so Great" > Not so Great<br>
+   <input id="c" type="radio" name="d" value="Kill Me" > Kill Me<br>
+   <input id="d" type="radio" name="d" value="This webpage has restored my faith in humanity" > This webpage has restored my faith in humanity<br>
+ 
+
+
+<h2>How could we improve our website</h2>
+   
+
+
+   <!--question 5-->
+
+   <input id="a" type="radio" name="e" value="It is perfect as is" > It is perfect as is<br>
+   <input id="b" type="radio" name="e" value="It needs to be completely overhauled" > It should be completely overhauled<br>
+   <input id="c" type="radio" name="e" value="Improve load times" > Improve load times<br>
+   <input id="d" type="radio" name="e" value="Add more features" > Add more features<br>
+   <input type="submit">
+ </form> 
+<h1>score:{{score}}</h1>
+{% endblock %}
